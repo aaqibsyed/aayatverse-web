@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Viewport } from "next";
 import MainLayout from "@/components/layout/MainLayout";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "sonner";
 import QueryProvider from "@/providers/query-provider";
+import AppProvider from "@/providers/app-provider";
 
 export const metadata = {
   title: "AayatVerse",
@@ -26,14 +26,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <QueryProvider>
-          <ThemeProvider>
+          <AppProvider>
             <MainLayout>{children}</MainLayout>
             <Toaster
               richColors
               position="top-center"
               closeButton
             />
-          </ThemeProvider>
+          </AppProvider>
         </QueryProvider>
       </body>
     </html>

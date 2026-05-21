@@ -10,9 +10,7 @@ export default function AppProvider({
 }) {
   return (
     <QueryProvider>
-      <ThemeProvider>
-        {children}
-      </ThemeProvider>
+      <ThemeProvider>{children}</ThemeProvider>
     </QueryProvider>
   );
 }

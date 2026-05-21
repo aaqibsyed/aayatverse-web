@@ -1,12 +1,14 @@
 import { cn } from "@/lib/utils";
 
-export default function AppCard({
-  className,
-  children,
-}: {
-  className?: string;
+interface AppCardProps {
   children: React.ReactNode;
-}) {
+  className?: string;
+}
+
+export default function AppCard({
+  children,
+  className,
+}: AppCardProps) {
   return (
     <div
       className={cn(
