@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Viewport } from "next";
 import MainLayout from "@/components/layout/MainLayout";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "sonner";
+import QueryProvider from "@/providers/query-provider";
 
 export const metadata = {
   title: "AayatVerse",
@@ -23,9 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider>
-          <MainLayout>{children}</MainLayout>
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider>
+            <MainLayout>{children}</MainLayout>
+            <Toaster
+              richColors
+              position="top-center"
+              closeButton
+            />
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
