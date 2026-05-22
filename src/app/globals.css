@@ -21,6 +21,9 @@
 
   background-size: 30px 30px;
 } */
+ html {
+  scrollbar-gutter: stable;
+}
 
 @custom-variant dark (&:is(.dark *));
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X, BookOpen, ScrollText, Clock3, HandHeart, CalendarDays, Coins } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import ThemeToggle from "./ThemeToggle";
 
@@ -43,7 +44,7 @@ const links = [
 
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
-
+    const pathname = usePathname();
     return (
         <>
             <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
@@ -55,15 +56,50 @@ export default function Navbar() {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden items-center gap-6 md:flex">
-                        {links.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="text-sm font-medium transition-colors hover:text-emerald-600"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                        {links.map((link) => {
+                            const isActive =
+                                pathname === link.href ||
+                                pathname.startsWith(`${link.href}/`);
+
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={`
+                                                relative
+                                                pb-2
+                                                transition-colors
+                                                ${isActive
+                                            ? "text-emerald-600 font-medium"
+                                            : "text-muted-foreground hover:text-foreground"
+                                        }
+      `}
+                                >
+                                    {link.label}
+
+                                    
+                                        <span
+                                            className={`
+                                                        absolute
+                                                        bottom-0
+                                                        left-0
+                                                        h-0.5
+                                                        w-full
+                                                        rounded-full
+                                                        transition-opacity
+                                                        duration-300
+                                                        bg-emerald-600
+                                                        ${
+                                                        isActive
+                                                            ? "opacity-100"
+                                                            : "opacity-0"
+                                                        }
+                                                        `}
+                                        />
+                                    
+                                </Link>
+                            );
+                        })}
 
                         <ThemeToggle />
                     </nav>
@@ -107,6 +143,9 @@ export default function Navbar() {
 
                     <nav className="flex flex-col px-6 py-8">
                         {links.map((link) => {
+                            const isActive =
+                                pathname === link.href ||
+                                pathname.startsWith(`${link.href}/`)
                             const Icon = link.icon;
 
                             return (
@@ -114,7 +153,9 @@ export default function Navbar() {
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setMobileOpen(false)}
-                                    className="flex items-center gap-4 rounded-xl px-4 py-4 text-lg font-medium transition-colors hover:bg-muted"
+                                    className={`flex items-center gap-4 rounded-xl px-4 py-4 text-lg font-medium transition-colors  ${isActive
+                                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
+                                        : "hover:bg-muted"}}`}
                                 >
                                     <Icon className="h-5 w-5 text-emerald-600" />
                                     {link.label}
