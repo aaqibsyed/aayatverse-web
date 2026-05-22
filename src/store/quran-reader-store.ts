@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export type ViewMode =
   | "reading"
@@ -8,6 +9,14 @@ interface QuranReaderState {
   viewMode: ViewMode;
 
   fontSize: number;
+
+  activeAyah: number | null;
+  activeSurah: number | null;
+
+  setActiveAyah: (
+    surah: number,
+    ayah: number
+  ) => void;
 
   setViewMode: (
     mode: ViewMode
@@ -29,6 +38,18 @@ export const useQuranReaderStore =
         window.innerWidth < 768
         ? 28
         : 36,
+
+    activeAyah: null,
+    activeSurah: null,
+
+    setActiveAyah: (
+      surah,
+      ayah
+    ) =>
+      set({
+        activeSurah: surah,
+        activeAyah: ayah,
+      }),
 
     setViewMode: (viewMode) =>
       set({ viewMode }),
