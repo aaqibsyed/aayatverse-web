@@ -18,7 +18,7 @@ export default function ReaderControls() {
   } = useQuranReaderStore();
 
   return (
-    <AppCard className="mb-8 p-4">
+    <AppCard className="mb-8 p-4 backdrop-blur">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <BookOpen className="h-5 w-5 text-emerald-600" />

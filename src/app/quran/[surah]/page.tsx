@@ -10,6 +10,7 @@ import StudyMode from "@/components/quran/StudyMode";
 import SurahHeader from "@/components/quran/SurahHeader";
 import ReaderControls from "@/components/quran/ReaderControls";
 import BackButton from "@/components/shared/BackButton";
+import { useChapter } from "@/features/quran/hooks/use-chapter";
 
 export default function SurahPage() {
     const params = useParams();
@@ -17,6 +18,10 @@ export default function SurahPage() {
     const chapterId = Number(
         params.surah
     );
+
+    const {
+        data: chapter,
+    } = useChapter(chapterId);
 
     const {
         data,
@@ -46,12 +51,26 @@ export default function SurahPage() {
     return (
         <main className="mx-auto max-w-5xl px-6 py-10">
             <BackButton />
-            <SurahHeader
-                englishName="Al-Fatihah"
-                arabicName="الفاتحة"
-                versesCount={7}
-                revelationPlace="Meccan"
-            />
+            {chapter && (
+                <SurahHeader
+                    surahNumber={chapter.id}
+                    englishName={
+                        chapter.name_simple
+                    }
+                    arabicName={
+                        chapter.name_arabic
+                    }
+                    versesCount={
+                        chapter.verses_count
+                    }
+                    revelationPlace={
+                        chapter.revelation_place ===
+                            "makkah"
+                            ? "Meccan"
+                            : "Medinan"
+                    }
+                />
+            )}
 
             {viewMode === "reading" && (
                 <ReaderControls />

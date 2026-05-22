@@ -20,7 +20,11 @@ export default function ReadingMode({
       className="
         rounded-3xl
   border
-  bg-card
+  bg-gradient-to-b
+from-white
+to-slate-50
+dark:from-card
+dark:to-card
   p-10
   text-right
   text-5xl

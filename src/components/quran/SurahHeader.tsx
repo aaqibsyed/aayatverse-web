@@ -1,6 +1,7 @@
 import ViewModeToggle from "./ViewModeToggle";
 
 interface Props {
+  surahNumber: number;
   englishName: string;
   arabicName: string;
   versesCount: number;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export default function SurahHeader({
+  surahNumber,
   englishName,
   arabicName,
   versesCount,
@@ -43,30 +45,67 @@ export default function SurahHeader({
       />
       <div className="relative z-10">
         <div className="text-center">
-          <h1 className="text-4xl font-bold">
-            {englishName}
-          </h1>
+          <div className="flex flex-col items-center">
+            {/* <span
+    className="
+      mb-2
+      rounded-full
+      border
+      border-emerald-200
+      bg-emerald-50
+      px-4
+      py-1
+      text-sm
+      font-medium
+      text-emerald-700
+      dark:border-emerald-800
+      dark:bg-emerald-950/30
+      dark:text-emerald-400
+    "
+  >
+    Surah {surahNumber}
+  </span> */}
+
+            <h1
+              className="
+    text-3xl
+    font-bold
+    sm:text-4xl
+  "
+            >
+              <span className="text-emerald-600">
+                {String(surahNumber).padStart(2, "0")}
+              </span>
+
+              <span className="mx-2 text-muted-foreground">
+                •
+              </span>
+
+              {englishName}
+            </h1>
+          </div>
 
           <p
             dir="rtl"
             className="
             mt-5
-    text-5xl
-    font-medium
-    text-emerald-700
-    dark:text-emerald-400
-          "
+            text-4xl
+            sm:text-5xl
+            font-medium
+            text-emerald-700
+            dark:text-emerald-400
+                  "
           >
             {arabicName}
           </p>
 
           <p className="
             mt-4
-    text-sm
-    tracking-wide
-    uppercase
-    text-muted-foreground
-          
+            text-sm
+            tracking-wide
+            uppercase
+            text-muted-foreground
+                  
           ">
             {revelationPlace} • {versesCount} Verses
           </p>
@@ -76,7 +115,7 @@ export default function SurahHeader({
           <ViewModeToggle />
         </div>
       </div>
-      </div>
+    </div>
 
-      );
+  );
 }

@@ -12,7 +12,7 @@ export default function AppCard({
   return (
     <div
       className={cn(
-        "rounded-3xl border bg-card shadow-sm",
+        "rounded-3xl border bg-linear-to-b from-white to-slate-50 shadow-sm dark:from-card dark:to-card",
         className
       )}
     >

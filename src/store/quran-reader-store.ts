@@ -22,7 +22,13 @@ export const useQuranReaderStore =
   create<QuranReaderState>((set) => ({
     viewMode: "reading",
 
-    fontSize: 48,
+    // fontSize: 36,
+
+    fontSize:
+      typeof window !== "undefined" &&
+        window.innerWidth < 768
+        ? 28
+        : 36,
 
     setViewMode: (viewMode) =>
       set({ viewMode }),
@@ -30,16 +36,16 @@ export const useQuranReaderStore =
     increaseFontSize: () =>
       set((state) => ({
         fontSize: Math.min(
-          state.fontSize + 4,
-          72
+          state.fontSize + 2,
+          56
         ),
       })),
 
     decreaseFontSize: () =>
       set((state) => ({
         fontSize: Math.max(
-          state.fontSize - 4,
-          28
+          state.fontSize - 2,
+          24
         ),
       })),
   }));
