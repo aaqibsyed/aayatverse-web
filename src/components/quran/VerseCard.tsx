@@ -17,6 +17,7 @@ export default function VerseCard({
     activeAyah,
     activeSurah,
     setActiveAyah,
+    setLastReadPosition,
   } = useQuranReaderStore();
 
   const isActive =
@@ -25,12 +26,16 @@ export default function VerseCard({
 
   return (
     <AppCard
-      onClick={() =>
+      onClick={() => {
         setActiveAyah(
           surahNumber,
           verseNumber
         )
-      }
+        setLastReadPosition(
+          surahNumber,
+          verseNumber
+        );
+      }}
       className={`
         p-6
         cursor-pointer
@@ -38,16 +43,15 @@ export default function VerseCard({
         duration-300
         ease-out
 
-        ${
-          isActive
-            ? `
+        ${isActive
+          ? `
               border-amber-400
               bg-amber-50
 
               dark:border-amber-500
               dark:bg-amber-500/10
             `
-            : `
+          : `
               hover:-translate-y-1
               hover:shadow-lg
               hover:border-emerald-200
@@ -93,6 +97,6 @@ export default function VerseCard({
       >
         {arabic}
       </p>
-    </AppCard>
+    </AppCard >
   );
 }

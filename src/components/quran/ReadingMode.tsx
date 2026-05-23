@@ -18,6 +18,7 @@ export default function ReadingMode({
     activeAyah,
     activeSurah,
     setActiveAyah,
+    setLastReadPosition
   } = useQuranReaderStore();
 
   return (
@@ -57,12 +58,16 @@ export default function ReadingMode({
         return (
           <span
             key={verse.id}
-            onClick={() =>
+            onClick={() => {
               setActiveAyah(
                 surahNumber,
                 verseNumber
               )
-            }
+              setLastReadPosition(
+                surahNumber,
+                verseNumber
+              );
+            }}
             className={`
         cursor-pointer
         rounded-lg
@@ -116,6 +121,6 @@ export default function ReadingMode({
           </span>
         )
       })}
-    </div>
+    </div >
   );
 }

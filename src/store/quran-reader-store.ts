@@ -13,7 +13,15 @@ interface QuranReaderState {
   activeAyah: number | null;
   activeSurah: number | null;
 
+  lastReadSurah: number | null;
+  lastReadAyah: number | null;
+
   setActiveAyah: (
+    surah: number,
+    ayah: number
+  ) => void;
+
+  setLastReadPosition: (
     surah: number,
     ayah: number
   ) => void;
@@ -44,6 +52,9 @@ export const useQuranReaderStore =
         activeAyah: null,
         activeSurah: null,
 
+        lastReadSurah: null,
+        lastReadAyah: null,
+
         setActiveAyah: (
           surah,
           ayah
@@ -53,6 +64,15 @@ export const useQuranReaderStore =
             activeAyah: ayah,
           }),
 
+
+        setLastReadPosition: (
+          surah,
+          ayah
+        ) =>
+          set({
+            lastReadSurah: surah,
+            lastReadAyah: ayah,
+          }),
         setViewMode: (viewMode) =>
           set({ viewMode }),
 
@@ -77,6 +97,11 @@ export const useQuranReaderStore =
         partialize: (state) => ({
           viewMode: state.viewMode,
           fontSize: state.fontSize,
+          lastReadSurah:
+            state.lastReadSurah,
+
+          lastReadAyah:
+            state.lastReadAyah,
         }),
       }
     )
