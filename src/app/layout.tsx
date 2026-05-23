@@ -115,6 +115,10 @@ export const metadata: Metadata = {
       "https://aayatverse.com",
   },
 
+  other: {
+    'publish-date': '2026-05-22', 
+  },
+
 }
 
 export const viewport: Viewport = {
