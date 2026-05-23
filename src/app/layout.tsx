@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Read the Holy Quran online with a beautiful reading experience. Explore Quran reading mode, study mode, bookmarks, and upcoming Islamic resources including Hadith, Duas, Prayer Times, and more.",
+    "Read the Holy Quran online with a beautiful reading experience, bookmarks, study mode, reading progress tracking and future Islamic resources including Hadith, Duas, Prayer Times and more.",
 
   applicationName:
     "AayatVerse",
@@ -85,14 +85,12 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/og-image.png",
-
+        url: "https://aayatverse.com/og-image.png",
+        secureUrl:
+          "https://aayatverse.com/og-image.png",
         width: 1200,
-
         height: 630,
-
-        alt:
-          "AayatVerse Quran Reader",
+        alt: "AayatVerse Quran Reader",
       },
     ],
   },
@@ -110,6 +108,11 @@ export const metadata: Metadata = {
     images: [
       "/og-image.png",
     ],
+  },
+
+  alternates: {
+    canonical:
+      "https://aayatverse.com",
   },
 
 }
