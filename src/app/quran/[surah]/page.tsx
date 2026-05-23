@@ -11,6 +11,7 @@ import SurahHeader from "@/components/quran/SurahHeader";
 import ReaderControls from "@/components/quran/ReaderControls";
 import BackButton from "@/components/shared/BackButton";
 import { useChapter } from "@/features/quran/hooks/use-chapter";
+import SurahNavigator from "@/components/quran/SurahNavigator";
 
 export default function SurahPage() {
     const params = useParams();
@@ -75,6 +76,10 @@ export default function SurahPage() {
             {viewMode === "reading" && (
                 <ReaderControls />
             )}
+
+            <SurahNavigator
+                currentSurah={chapterId}
+            />
 
             {viewMode === "reading" ? (
                 <ReadingMode surahNumber={chapterId} verses={data?.verses ?? []} />
