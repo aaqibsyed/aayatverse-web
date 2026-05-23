@@ -21,6 +21,7 @@ export default function ComingSoon({
         items-center
         justify-center
         px-6
+        pb-safe
         text-center
       "
     >
@@ -64,7 +65,8 @@ export default function ComingSoon({
 
       <h1
         className="
-          text-4xl
+          text-3xl
+          sm:text-4xl
           font-bold
         "
       >
@@ -75,6 +77,7 @@ export default function ComingSoon({
         className="
           mt-4
           max-w-xl
+          leading-relaxed
           text-muted-foreground
         "
       >

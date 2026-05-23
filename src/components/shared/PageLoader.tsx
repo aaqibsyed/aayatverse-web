@@ -1,7 +1,7 @@
 import { BookOpen } from "lucide-react";
 
 interface PageLoaderProps {
-  text: string
+  text?: string
 }
 
 export default function PageLoader({text}:PageLoaderProps) {
@@ -60,7 +60,7 @@ export default function PageLoader({text}:PageLoaderProps) {
           font-semibold
         "
       >
-        {text}
+        {text ?? "Loading..."}
       </h2>
 
       <p
