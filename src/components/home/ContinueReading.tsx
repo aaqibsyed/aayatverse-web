@@ -33,7 +33,7 @@ export default function ContinueReading() {
   }
 
   return (
-    <section className="mx-auto max-w-7xl px-6 pt-10">
+    <section className="mx-auto max-w-7xl px-6">
       <AppCard
         className="
           overflow-hidden

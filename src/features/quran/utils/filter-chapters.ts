@@ -4,11 +4,21 @@ export function filterChapters(
   chapters: Chapter[],
   search: string
 ) {
-  const term = search.toLowerCase();
+  const term =
+    search.trim().toLowerCase();
 
-  return chapters.filter((chapter) =>
-    chapter.name_simple
-      .toLowerCase()
-      .includes(term)
+  if (!term) {
+    return chapters;
+  }
+
+  return chapters.filter(
+    (chapter) =>
+      chapter.name_simple
+        .toLowerCase()
+        .includes(term) ||
+      chapter.name_arabic
+        .toLowerCase()
+        .includes(term) ||
+      String(chapter.id).includes(term)
   );
 }

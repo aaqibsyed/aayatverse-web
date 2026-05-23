@@ -37,11 +37,17 @@ export default function QuranPage() {
       </h1>
 
       <Input
-        placeholder="Search Surah..."
+        placeholder="Search by surah name or number..."
         value={search}
         onChange={(e) =>
           setSearch(e.target.value)
         }
+        className="
+                    h-12
+                    rounded-2xl
+                    border-emerald-100
+                    focus-visible:ring-emerald-600
+                  "
       />
 
       {chapters.length === 0 && (
