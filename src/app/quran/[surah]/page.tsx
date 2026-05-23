@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 import { useVerses } from "@/features/quran/hooks/use-verses";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
@@ -15,6 +15,13 @@ import SurahNavigator from "@/components/quran/SurahNavigator";
 
 export default function SurahPage() {
     const params = useParams();
+
+    const searchParams =
+        useSearchParams();
+
+    const targetAyah = Number(
+        searchParams.get("ayah")
+    );
 
     const chapterId = Number(
         params.surah
@@ -51,7 +58,7 @@ export default function SurahPage() {
 
     return (
         <main className="mx-auto max-w-5xl px-6 py-10">
-            <BackButton href="/quran" label="All Surah"/>
+            <BackButton href="/quran" label="All Surah" />
             {chapter && (
                 <SurahHeader
                     surahNumber={chapter.id}
@@ -82,9 +89,9 @@ export default function SurahPage() {
             />
 
             {viewMode === "reading" ? (
-                <ReadingMode surahNumber={chapterId} verses={data?.verses ?? []} />
+                <ReadingMode surahNumber={chapterId} verses={data?.verses ?? []} targetAyah={targetAyah} />
             ) : (
-                <StudyMode surahNumber={chapterId} verses={data?.verses ?? []} />
+                <StudyMode surahNumber={chapterId} verses={data?.verses ?? []} targetAyah={targetAyah} />
             )}
         </main>
     );

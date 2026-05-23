@@ -36,7 +36,7 @@ export default function ContinueReading() {
     <section className="mx-auto max-w-7xl px-6">
       <AppCard
         className="
-          overflow-hidden
+          overflow-hiddena
           border-emerald-200
           bg-linear-to-br
           from-emerald-50
@@ -74,7 +74,7 @@ export default function ContinueReading() {
           </div>
 
           <Link
-            href={`/quran/${lastReadSurah}`}
+            href={`/quran/${lastReadSurah}?ayah=${lastReadAyah}`}
             className="
               inline-flex
               items-center

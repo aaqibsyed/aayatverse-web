@@ -1,16 +1,22 @@
 "use client";
 
+import {
+  useEffect,
+  useRef,
+} from "react";
 import type { Verse } from "@/features/quran/types/verse.types";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
 
 interface Props {
   surahNumber: number;
   verses: Verse[];
+  targetAyah?: number
 }
 
 export default function ReadingMode({
   surahNumber,
   verses,
+  targetAyah,
 }: Props) {
 
   const {
@@ -20,6 +26,34 @@ export default function ReadingMode({
     setActiveAyah,
     setLastReadPosition
   } = useQuranReaderStore();
+
+  const targetRef =
+    useRef<HTMLSpanElement | null>(
+      null
+    );
+
+  useEffect(() => {
+    if (
+      targetAyah &&
+      targetRef.current
+    ) {
+      setTimeout(() => {
+        targetRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+
+        setActiveAyah(
+          surahNumber,
+          targetAyah
+        );
+      }, 300);
+    }
+  }, [
+    targetAyah,
+    surahNumber,
+    setActiveAyah,
+  ]);
 
   return (
     <div
@@ -58,6 +92,11 @@ export default function ReadingMode({
         return (
           <span
             key={verse.id}
+            ref={
+              verseNumber === targetAyah
+                ? targetRef
+                : null
+            }
             onClick={() => {
               setActiveAyah(
                 surahNumber,
