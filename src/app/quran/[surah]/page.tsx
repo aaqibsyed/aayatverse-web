@@ -12,6 +12,7 @@ import ReaderControls from "@/components/quran/ReaderControls";
 import BackButton from "@/components/shared/BackButton";
 import { useChapter } from "@/features/quran/hooks/use-chapter";
 import SurahNavigator from "@/components/quran/SurahNavigator";
+import PageLoader from "@/components/shared/PageLoader";
 
 export default function SurahPage() {
     const params = useParams();
@@ -42,9 +43,10 @@ export default function SurahPage() {
 
     if (isLoading) {
         return (
-            <div className="p-10">
-                Loading Surah...
-            </div>
+            // <div className="p-10">
+            //     Loading Surah...
+            // </div>
+            <PageLoader text="Loading Surah..." />
         );
     }
 

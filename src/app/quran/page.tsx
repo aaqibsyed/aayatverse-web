@@ -8,6 +8,7 @@ import { useChapters } from "@/features/quran/hooks/use-chapters";
 import { filterChapters } from "@/features/quran/utils/filter-chapters";
 
 import ChapterCard from "@/components/quran/ChapterCard";
+import PageLoader from "@/components/shared/PageLoader";
 
 export default function QuranPage() {
   const [search, setSearch] = useState("");
@@ -23,7 +24,8 @@ export default function QuranPage() {
   }, [data, search]);
 
   if (isLoading) {
-    return <div>Loading Quran...</div>;
+    // return <div>Loading Quran...</div>;
+    return <PageLoader text="Loading Quran. . ." />
   }
 
   if (error) {

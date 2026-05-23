@@ -1,9 +1,14 @@
-import React from 'react'
+import ComingSoon from "@/components/shared/ComingSoon";
 
-export default function page() {
-  return (
-    <div>
-      
-    </div>
-  )
+export default function CalendarPage() {
+    return (
+        <ComingSoon
+            title="Calendar"
+            description="
+                        Islamic Calendar,
+                        Imprtant Dates
+                        Islamic holidays
+                        Historical reminders."
+        />
+    );
 }
