@@ -8,7 +8,6 @@ import { useChapters } from "@/features/quran/hooks/use-chapters";
 import { filterChapters } from "@/features/quran/utils/filter-chapters";
 
 import ChapterCard from "@/components/quran/ChapterCard";
-import BackButton from "@/components/shared/BackButton";
 
 export default function QuranPage() {
   const [search, setSearch] = useState("");
@@ -33,7 +32,6 @@ export default function QuranPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10 min-h-[calc(100vh-4rem)]">
-      <BackButton />
       <h1 className="mb-6 text-4xl font-bold">
         Quran
       </h1>

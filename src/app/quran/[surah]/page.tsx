@@ -51,7 +51,7 @@ export default function SurahPage() {
 
     return (
         <main className="mx-auto max-w-5xl px-6 py-10">
-            <BackButton />
+            <BackButton href="/quran" label="Quran"/>
             {chapter && (
                 <SurahHeader
                     surahNumber={chapter.id}

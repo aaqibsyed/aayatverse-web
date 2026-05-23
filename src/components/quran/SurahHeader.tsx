@@ -65,6 +65,7 @@ export default function SurahHeader({
   >
     Surah {surahNumber}
   </span> */}
+  
 
             <h1
               className="
