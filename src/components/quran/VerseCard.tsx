@@ -18,11 +18,23 @@ export default function VerseCard({
     activeSurah,
     setActiveAyah,
     setLastReadPosition,
+    bookmarks,
+    addBookmark,
+    removeBookmark,
   } = useQuranReaderStore();
 
   const isActive =
     activeAyah === verseNumber &&
     activeSurah === surahNumber;
+
+  const isBookmarked =
+    bookmarks.some(
+      (bookmark) =>
+        bookmark.surahNumber ===
+        surahNumber &&
+        bookmark.ayahNumber ===
+        verseNumber
+    );
 
   return (
     <AppCard
@@ -82,6 +94,39 @@ export default function VerseCard({
         ">
           {verseNumber}
         </div>
+        {isActive && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+
+              if (isBookmarked) {
+                removeBookmark(
+                  surahNumber,
+                  verseNumber
+                );
+              } else {
+                addBookmark(
+                  surahNumber,
+                  verseNumber
+                );
+              }
+            }}
+            className="
+      rounded-xl
+      border
+      px-3
+      py-2
+      text-sm
+      font-medium
+      transition
+      hover:bg-muted
+    "
+          >
+            {isBookmarked
+              ? "⭐ Saved"
+              : "🔖 Bookmark"}
+          </button>
+        )}
       </div>
 
       <p

@@ -67,9 +67,8 @@ export default function StudyMode({
           >
             
             <VerseCard
-              key={verse.id}
               surahNumber={surahNumber}
-              verseNumber={index + 1}
+              verseNumber={verseNumber}
               arabic={verse.text_uthmani}
             />
           </div>

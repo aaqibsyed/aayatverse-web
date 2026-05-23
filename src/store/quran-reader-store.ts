@@ -1,11 +1,30 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+export interface Bookmark {
+  surahNumber: number;
+  ayahNumber: number;
+  createdAt: number;
+}
+
 export type ViewMode =
   | "reading"
   | "study";
 
 interface QuranReaderState {
+
+  bookmarks: Bookmark[];
+
+  addBookmark: (
+    surah: number,
+    ayah: number
+  ) => void;
+
+  removeBookmark: (
+    surah: number,
+    ayah: number
+  ) => void;
+
   viewMode: ViewMode;
 
   fontSize: number;
@@ -15,6 +34,12 @@ interface QuranReaderState {
 
   lastReadSurah: number | null;
   lastReadAyah: number | null;
+
+  hasHydrated: boolean;
+
+  setHasHydrated: (
+    hydrated: boolean
+  ) => void;
 
   setActiveAyah: (
     surah: number,
@@ -55,6 +80,23 @@ export const useQuranReaderStore =
         lastReadSurah: null,
         lastReadAyah: null,
 
+        bookmarks: [],
+
+        hasHydrated: false,
+
+        setHasHydrated: (
+          hydrated
+        ) =>
+          set({
+            hasHydrated: hydrated,
+          }),
+
+          onRehydrateStorage: () => {
+  return (state) => {
+    state?.setHasHydrated(true);
+  };
+},
+
         setActiveAyah: (
           surah,
           ayah
@@ -73,6 +115,52 @@ export const useQuranReaderStore =
             lastReadSurah: surah,
             lastReadAyah: ayah,
           }),
+
+        addBookmark: (
+          surah,
+          ayah
+        ) =>
+          set((state) => {
+            const exists =
+              state.bookmarks.some(
+                (bookmark) =>
+                  bookmark.surahNumber ===
+                  surah &&
+                  bookmark.ayahNumber === ayah
+              );
+
+            if (exists) {
+              return {};
+            }
+
+            return {
+              bookmarks: [
+                ...state.bookmarks,
+                {
+                  surahNumber: surah,
+                  ayahNumber: ayah,
+                  createdAt: Date.now(),
+                },
+              ],
+            };
+          }),
+
+        removeBookmark: (
+          surah,
+          ayah
+        ) =>
+          set((state) => ({
+            bookmarks:
+              state.bookmarks.filter(
+                (bookmark) =>
+                  !(
+                    bookmark.surahNumber ===
+                    surah &&
+                    bookmark.ayahNumber === ayah
+                  )
+              ),
+          })),
+
         setViewMode: (viewMode) =>
           set({ viewMode }),
 
@@ -102,6 +190,8 @@ export const useQuranReaderStore =
 
           lastReadAyah:
             state.lastReadAyah,
+
+          bookmarks: state.bookmarks,
         }),
       }
     )

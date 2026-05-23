@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, BookOpen, ScrollText, Clock3, HandHeart, CalendarDays, Coins } from "lucide-react";
+import { Menu, X, BookOpen, ScrollText, Clock3, HandHeart, CalendarDays, Coins, Bookmark } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -40,6 +40,11 @@ const links = [
         label: "Zakat",
         icon: Coins,
     },
+    {
+        href: "/bookmarks",
+        label: "Bookmarks",
+        icon: Bookmark,
+    }
 ];
 
 export default function Navbar() {
@@ -77,9 +82,9 @@ export default function Navbar() {
                                 >
                                     {link.label}
 
-                                    
-                                        <span
-                                            className={`
+
+                                    <span
+                                        className={`
                                                         absolute
                                                         bottom-0
                                                         left-0
@@ -89,14 +94,13 @@ export default function Navbar() {
                                                         transition-opacity
                                                         duration-300
                                                         bg-emerald-600
-                                                        ${
-                                                        isActive
-                                                            ? "opacity-100"
-                                                            : "opacity-0"
-                                                        }
+                                                        ${isActive
+                                                ? "opacity-100"
+                                                : "opacity-0"
+                                            }
                                                         `}
-                                        />
-                                    
+                                    />
+
                                 </Link>
                             );
                         })}
