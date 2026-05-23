@@ -35,11 +35,8 @@ interface QuranReaderState {
   lastReadSurah: number | null;
   lastReadAyah: number | null;
 
-  hasHydrated: boolean;
 
-  setHasHydrated: (
-    hydrated: boolean
-  ) => void;
+
 
   setActiveAyah: (
     surah: number,
@@ -82,20 +79,10 @@ export const useQuranReaderStore =
 
         bookmarks: [],
 
-        hasHydrated: false,
 
-        setHasHydrated: (
-          hydrated
-        ) =>
-          set({
-            hasHydrated: hydrated,
-          }),
+        
 
-          onRehydrateStorage: () => {
-  return (state) => {
-    state?.setHasHydrated(true);
-  };
-},
+          
 
         setActiveAyah: (
           surah,
