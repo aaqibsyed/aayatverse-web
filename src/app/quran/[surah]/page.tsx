@@ -13,6 +13,7 @@ import BackButton from "@/components/shared/BackButton";
 import { useChapter } from "@/features/quran/hooks/use-chapter";
 import SurahNavigator from "@/components/quran/SurahNavigator";
 import PageLoader from "@/components/shared/PageLoader";
+import type { Metadata } from "next";
 
 export default function SurahPage() {
     const params = useParams();

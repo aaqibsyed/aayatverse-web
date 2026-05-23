@@ -1,20 +1,124 @@
 import "./globals.css";
-import type { Viewport } from "next";
 import MainLayout from "@/components/layout/MainLayout";
 import { Toaster } from "sonner";
 import QueryProvider from "@/providers/query-provider";
 import AppProvider from "@/providers/app-provider";
+import type {
+  Metadata,
+  Viewport,
+} from "next";
 
-export const metadata = {
-  title: "AayatVerse",
+export const metadata: Metadata = {
+  metadataBase: new URL(
+    "https://aayatverse.com"
+  ),
+
+  title: {
+    default: "AayatVerse",
+    template: "%s | AayatVerse",
+  },
+
   description:
-    "Quran, Hadith, Prayer Times, Duas, Islamic Learning and more.",
-};
+    "Read the Holy Quran online with a beautiful reading experience. Explore Quran reading mode, study mode, bookmarks, and upcoming Islamic resources including Hadith, Duas, Prayer Times, and more.",
+
+  applicationName:
+    "AayatVerse",
+
+  keywords: [
+    "Quran",
+    "Holy Quran",
+    "Read Quran online",
+    "Quran Arabic",
+    "Quran study",
+    "Quran reader",
+    "Islam",
+    "Islamic app",
+    "Hadith",
+    "Hadees",
+    "Dua",
+    "Prayer Times",
+    "Islamic resources",
+    "Muslim app",
+  ],
+
+  authors: [
+    {
+      name: "Aaqib Javed",
+    },
+  ],
+
+  creator: "Aaqib Javed",
+
+  publisher: "AayatVerse",
+
+  category: "Religion",
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview":
+        "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
+
+  openGraph: {
+    type: "website",
+
+    locale: "en_US",
+
+    url:
+      "https://aayatverse.com",
+
+    title: "AayatVerse",
+
+    description:
+      "Read the Holy Quran online with bookmarks, study mode and a modern Islamic reading experience.",
+
+    siteName:
+      "AayatVerse",
+
+    images: [
+      {
+        url: "/og-image.png",
+
+        width: 1200,
+
+        height: 630,
+
+        alt:
+          "AayatVerse Quran Reader",
+      },
+    ],
+  },
+
+  twitter: {
+    card:
+      "summary_large_image",
+
+    title:
+      "AayatVerse",
+
+    description:
+      "Read the Holy Quran online with bookmarks, study mode and future Islamic resources.",
+
+    images: [
+      "/og-image.png",
+    ],
+  },
+
+}
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#059669",
 };
 
 export default function RootLayout({
@@ -23,7 +127,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <body>
         <QueryProvider>
           <AppProvider>
