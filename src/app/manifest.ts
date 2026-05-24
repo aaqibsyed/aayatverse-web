@@ -6,17 +6,19 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "AayatVerse",
 
     description:
-      "Read the Holy Quran with a beautiful reading experience, bookmarks, study mode and Islamic resources.",
+      "Read the Holy Quran with bookmarks, study mode and Islamic resources.",
 
     start_url: "/",
 
+    scope: "/",
+
     display: "standalone",
 
-    background_color: "#ffffff",
+    orientation: "portrait",
+
+    background_color: "#000000",
 
     theme_color: "#059669",
-
-    orientation: "portrait",
 
     icons: [
       {
