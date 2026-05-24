@@ -3,6 +3,7 @@
 import {
   useEffect,
   useRef,
+  useState,
 } from "react";
 import type { Verse } from "@/features/quran/types/verse.types";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
@@ -31,6 +32,34 @@ export default function ReadingMode({
     useRef<HTMLSpanElement | null>(
       null
     );
+
+
+  const timerRef =
+    useRef<NodeJS.Timeout | null>(
+      null
+    );
+
+  const handleLongPress = (
+    ayah: number
+  ) => {
+    timerRef.current =
+      setTimeout(() => {
+        setDrawerOpen(true);
+      }, 500);
+  };
+
+  const clearLongPress = () => {
+    if (timerRef.current) {
+      clearTimeout(
+        timerRef.current
+      );
+    }
+  };
+
+  const [
+    drawerOpen,
+    setDrawerOpen,
+  ] = useState(false);
 
   useEffect(() => {
     if (
@@ -107,25 +136,40 @@ export default function ReadingMode({
                 verseNumber
               );
             }}
-            className={`
-        cursor-pointer
-        rounded-lg
-        px-2
-        py-1
-        transition-all
-        duration-200
+            onTouchStart={() =>
+              handleLongPress(
+                verseNumber
+              )
+            }
 
-        ${isActive
+            onTouchEnd={clearLongPress}
+
+            onMouseDown={() =>
+              handleLongPress(
+                verseNumber
+              )
+            }
+
+            onMouseUp={clearLongPress}
+            className={`
+                      cursor-pointer
+                      rounded-lg
+                      px-2
+                      py-1
+                      transition-all
+                      duration-200
+
+                      ${isActive
                 ? `
-              bg-amber-100
-              dark:bg-amber-500/20
-            `
+                            bg-amber-100
+                            dark:bg-amber-500/20
+                          `
                 : `
-              hover:bg-emerald-50
-              dark:hover:bg-emerald-900/20
-            `
+                            hover:bg-emerald-50
+                            dark:hover:bg-emerald-900/20
+                          `
               }
-      `}
+                    `}
           >
             {verse.text_uthmani}
 
