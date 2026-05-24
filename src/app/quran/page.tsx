@@ -38,19 +38,31 @@ export default function QuranPage() {
         Quran
       </h1>
 
-      <Input
-        placeholder="Search by surah name or number..."
-        value={search}
-        onChange={(e) =>
-          setSearch(e.target.value)
-        }
+      <div
         className="
+                  sticky
+                  top-16
+                  z-30
+                  mb-6
+                  bg-background/95
+                  backdrop-blur
+                  py-1
+                "
+      >
+        <Input
+          placeholder="Search by surah name or number..."
+          value={search}
+          onChange={(e) =>
+            setSearch(e.target.value)
+          }
+          className="
                     h-12
                     rounded-2xl
                     border-emerald-100
                     focus-visible:ring-emerald-600
                   "
-      />
+        />
+      </div>
 
       {chapters.length === 0 && (
         <div className="py-16 text-center">

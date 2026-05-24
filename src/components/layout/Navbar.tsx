@@ -109,7 +109,8 @@ export default function Navbar() {
                     </nav>
 
                     {/* Mobile Navigation Button */}
-                    <div className="md:hidden">
+                    <div className="md:hidden flex items-center gap-2">
+                        <ThemeToggle />
                         <button
                             type="button"
                             onClick={() => setMobileOpen(true)}
@@ -167,7 +168,7 @@ export default function Navbar() {
                             );
                         })}
 
-                        <div className="mt-8 border-t pt-6">
+                        {/* <div className="mt-8 border-t pt-6">
                             <div className="flex items-center justify-between">
                                 <span className="text-sm text-muted-foreground">
                                     Theme
@@ -175,7 +176,7 @@ export default function Navbar() {
 
                                 <ThemeToggle />
                             </div>
-                        </div>
+                        </div> */}
                     </nav>
                 </div>
             )}

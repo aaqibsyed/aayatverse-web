@@ -1,11 +1,26 @@
 import { Chapter } from "../types/chapter.types";
 
+function normalize(
+  value: string
+) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /[^a-z0-9\u0600-\u06FF]/g,
+      ""
+    );
+}
+
 export function filterChapters(
   chapters: Chapter[],
   search: string
 ) {
-  const term =
-    search.trim().toLowerCase();
+  const term = normalize(search);
 
   if (!term) {
     return chapters;
@@ -13,12 +28,14 @@ export function filterChapters(
 
   return chapters.filter(
     (chapter) =>
-      chapter.name_simple
-        .toLowerCase()
-        .includes(term) ||
-      chapter.name_arabic
-        .toLowerCase()
-        .includes(term) ||
-      String(chapter.id).includes(term)
+      normalize(
+        chapter.name_simple
+      ).includes(term) ||
+      normalize(
+        chapter.name_arabic
+      ).includes(term) ||
+      String(chapter.id).includes(
+        search.trim()
+      )
   );
 }

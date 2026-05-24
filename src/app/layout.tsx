@@ -110,13 +110,21 @@ export const metadata: Metadata = {
     ],
   },
 
+  appleWebApp: {
+    capable: true,
+    title: "AayatVerse",
+    statusBarStyle: "black-translucent",
+  },
+
+  manifest: "/manifest.webmanifest",
+
   alternates: {
     canonical:
       "https://aayatverse.com",
   },
 
   other: {
-    'publish-date': '2026-05-22', 
+    'publish-date': '2026-05-22',
   },
 
 }
@@ -135,6 +143,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
+      <head>
+        <meta
+          name="apple-mobile-web-app-capable"
+          content="yes"
+        />
+
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+      </head>
       <body>
         <QueryProvider>
           <AppProvider>
