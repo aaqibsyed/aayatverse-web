@@ -22,6 +22,7 @@ export default function ViewModeToggle() {
         ) {
           setViewMode(value);
         }
+        navigator.vibrate?.(12);
       }}
     >
       <ToggleGroupItem value="reading">
