@@ -110,13 +110,13 @@ export const metadata: Metadata = {
     ],
   },
 
-  appleWebApp: {
-    capable: true,
-    title: "AayatVerse",
-    statusBarStyle: "black-translucent",
-  },
+  // appleWebApp: {
+  //   capable: true,
+  //   title: "AayatVerse",
+  //   statusBarStyle: "black-translucent",
+  // },
 
-  manifest: "/manifest.webmanifest",
+  // manifest: "/manifest.webmanifest",
 
   alternates: {
     canonical:
