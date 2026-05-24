@@ -30,7 +30,10 @@ export default function ReaderControls() {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={decreaseFontSize}
+            onClick={()=> {
+              decreaseFontSize()
+              navigator.vibrate?.(8);
+            }}
             className="
               rounded-lg
               border
@@ -47,7 +50,10 @@ export default function ReaderControls() {
           </span>
 
           <button
-            onClick={increaseFontSize}
+            onClick={()=>{
+              increaseFontSize()
+              navigator.vibrate?.(12);
+            }}
             className="
               rounded-lg
               border

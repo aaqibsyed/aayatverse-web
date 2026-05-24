@@ -7,26 +7,59 @@ import {
 } from "react";
 import type { Verse } from "@/features/quran/types/verse.types";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
+import FloatingAyahToolbar from "./FloatingAyahToolbar";
+import { toast } from "sonner";
+import { Chapter } from "@/features/quran/types/chapter.types";
 
 interface Props {
   surahNumber: number;
   verses: Verse[];
-  targetAyah?: number
+  targetAyah?: number;
+  chapter?: Chapter
 }
 
 export default function ReadingMode({
   surahNumber,
   verses,
   targetAyah,
+  chapter,
 }: Props) {
 
   const {
     fontSize,
     activeAyah,
     activeSurah,
+    bookmarks,
+    addBookmark,
+    removeBookmark,
     setActiveAyah,
     setLastReadPosition
   } = useQuranReaderStore();
+
+  const [
+    selectedAyah,
+    setSelectedAyah,
+  ] = useState<number | null>(
+    null
+  );
+
+  const [
+    toolbarPosition,
+    setToolbarPosition,
+  ] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const isSelectedBookmarked =
+    selectedAyah !== null &&
+    bookmarks.some(
+      (bookmark) =>
+        bookmark.surahNumber ===
+        surahNumber &&
+        bookmark.ayahNumber ===
+        selectedAyah
+    );
 
   const targetRef =
     useRef<HTMLSpanElement | null>(
@@ -40,11 +73,63 @@ export default function ReadingMode({
     );
 
   const handleLongPress = (
-    ayah: number
+    ayah: number,
+    x: number,
+    y: number,
   ) => {
     timerRef.current =
       setTimeout(() => {
-        setDrawerOpen(true);
+        const element =
+          document.getElementById(
+            `ayah-${ayah}`
+          );
+
+        if (element) {
+          //   const rect =
+          //     element.getBoundingClientRect();
+
+          //   setToolbarPosition({
+          //     x:
+          //       rect.left +
+          //       rect.width / 2,
+
+          //     y:
+          //       rect.top - 12,
+          //   });
+
+
+          const TOOLBAR_WIDTH = 170;
+
+          const safeX = Math.min(
+            window.innerWidth -
+            TOOLBAR_WIDTH / 2 -
+            12,
+            Math.max(
+              TOOLBAR_WIDTH / 2 + 12,
+              x
+            )
+          );
+
+          setToolbarPosition({
+            x: safeX,
+            y: y - 25,
+          });
+        }
+
+        setSelectedAyah(ayah);
+
+        setActiveAyah(
+          surahNumber,
+          ayah
+        );
+
+        setLastReadPosition(
+          surahNumber,
+          ayah
+        );
+        if ("vibrate" in navigator) {
+          navigator.vibrate(20);
+        }
       }, 500);
   };
 
@@ -56,10 +141,7 @@ export default function ReadingMode({
     }
   };
 
-  const [
-    drawerOpen,
-    setDrawerOpen,
-  ] = useState(false);
+
 
   useEffect(() => {
     if (
@@ -84,10 +166,60 @@ export default function ReadingMode({
     setActiveAyah,
   ]);
 
+  // useEffect(() => {
+  //   const closeToolbar = () => {
+  //     setSelectedAyah(null);
+  //   };
+
+  //   window.addEventListener(
+  //     "scroll",
+  //     closeToolbar,
+  //     true
+  //   );
+
+  //   document.addEventListener(
+  //     "pointerdown",
+  //     closeToolbar
+  //   );
+
+  //   return () => {
+  //     window.removeEventListener(
+  //       "scroll",
+  //       closeToolbar,
+  //       true
+  //     );
+
+  //     document.removeEventListener(
+  //       "pointerdown",
+  //       closeToolbar
+  //     );
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setSelectedAyah(null);
+    };
+
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      true
+    );
+
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        handleScroll,
+        true
+      );
+  }, []);
+
   return (
-    <div
-      dir="rtl"
-      className="
+    <>
+      <div
+        dir="rtl"
+        className="
         rounded-3xl
           border
           bg-linear-to-b
@@ -107,51 +239,56 @@ export default function ReadingMode({
           text-emerald-900
           dark:text-emerald-100
               "
-      style={{
-        fontSize: `${fontSize}px`,
-        lineHeight: "2",
-      }}
-    >
-      {verses.map((verse, index) => {
-        const verseNumber = index + 1;
+        style={{
+          fontSize: `${fontSize}px`,
+          lineHeight: "2",
+        }}
+      >
+        {verses.map((verse, index) => {
+          const verseNumber = index + 1;
 
-        const isActive =
-          activeAyah === verseNumber &&
-          activeSurah === surahNumber;
-        return (
-          <span
-            key={verse.id}
-            ref={
-              verseNumber === targetAyah
-                ? targetRef
-                : null
-            }
-            onClick={() => {
-              setActiveAyah(
-                surahNumber,
-                verseNumber
-              )
-              setLastReadPosition(
-                surahNumber,
-                verseNumber
-              );
-            }}
-            onTouchStart={() =>
-              handleLongPress(
-                verseNumber
-              )
-            }
+          const isActive =
+            activeAyah === verseNumber &&
+            activeSurah === surahNumber;
+          return (
+            <span
+              id={`ayah-${verseNumber}`}
+              key={verse.id}
+              ref={
+                verseNumber === targetAyah
+                  ? targetRef
+                  : null
+              }
+              onClick={() => {
+                setActiveAyah(
+                  surahNumber,
+                  verseNumber
+                )
+                setLastReadPosition(
+                  surahNumber,
+                  verseNumber
+                );
+              }}
+              onTouchStart={(e) =>
+                handleLongPress(
+                  verseNumber,
+                  e.touches[0].clientX,
+                  e.touches[0].clientY,
+                )
+              }
 
-            onTouchEnd={clearLongPress}
+              onTouchEnd={clearLongPress}
 
-            onMouseDown={() =>
-              handleLongPress(
-                verseNumber
-              )
-            }
+              onMouseDown={(e) =>
+                handleLongPress(
+                  verseNumber,
+                  e.clientX,
+                  e.clientY,
+                )
+              }
 
-            onMouseUp={clearLongPress}
-            className={`
+              onMouseUp={clearLongPress}
+              className={`
                       cursor-pointer
                       rounded-lg
                       px-2
@@ -160,21 +297,24 @@ export default function ReadingMode({
                       duration-200
 
                       ${isActive
-                ? `
+                  ? `
                             bg-amber-100
                             dark:bg-amber-500/20
                           `
-                : `
+                  : `
                             hover:bg-emerald-50
                             dark:hover:bg-emerald-900/20
                           `
-              }
+                }
                     `}
-          >
-            {verse.text_uthmani}
+              onContextMenu={(e) => {
+                e.preventDefault();
+              }}
+            >
+              {verse.text_uthmani}
 
-            <span
-              className="
+              <span
+                className="
               mx-2
               inline-flex
               h-11
@@ -196,14 +336,115 @@ export default function ReadingMode({
               dark:to-amber-950/20
               dark:text-emerald-300
             "
-            >
-              {index + 1}
-            </span>
+              >
+                {index + 1}
+              </span>
 
-            {" "}
-          </span>
-        )
-      })}
-    </div >
+              {" "}
+            </span>
+          )
+        })}
+      </div >
+      <FloatingAyahToolbar
+        visible={
+          selectedAyah !== null
+        }
+        x={toolbarPosition.x}
+        y={toolbarPosition.y}
+        bookmarked={
+          isSelectedBookmarked
+        }
+        onBookmark={() => {
+          if (!selectedAyah) {
+            return;
+          }
+
+          if (
+            isSelectedBookmarked
+          ) {
+            removeBookmark(
+              surahNumber,
+              selectedAyah
+            );
+            navigator.vibrate?.(25);
+            toast.success(
+              "Bookmark removed"
+            );
+          } else {
+            addBookmark(
+              surahNumber,
+              selectedAyah
+            );
+            navigator.vibrate?.(15);
+            toast.success(
+              "Bookmark added"
+            );
+          }
+
+          setSelectedAyah(null);
+        }}
+        onCopy={async () => {
+          if (!selectedAyah) {
+            return;
+          }
+
+          const verse =
+            verses[selectedAyah - 1];
+
+          const copyText = `
+                            ${verse.text_uthmani}
+
+                            Surah ${chapter?.name_simple ?? surahNumber}
+                            (${surahNumber}:${selectedAyah})
+
+                            AayatVerse.com
+                            `;
+
+          await navigator.clipboard.writeText(
+            copyText.trim()
+          );
+          navigator.vibrate?.(10);
+          toast.success(
+            "Ayah copied"
+          );
+
+          setSelectedAyah(null);
+        }}
+        onShare={async () => {
+          if (!selectedAyah) {
+            return;
+          }
+
+          const verse =
+            verses[selectedAyah - 1];
+
+          const shareText = `
+                            ${verse.text_uthmani}
+
+                            Surah ${chapter?.name_simple ?? surahNumber}
+                            (${surahNumber}:${selectedAyah})
+
+                            https://aayatverse.com/quran/${surahNumber}?ayah=${selectedAyah}
+                            `.trim();
+
+          try {
+            if (navigator.share) {
+              await navigator.share({
+                title: "AayatVerse",
+                text: shareText,
+              });
+              setSelectedAyah(null)
+            } else {
+              await navigator.clipboard.writeText(
+                shareText
+              );
+              toast.success(
+                "Share text copied"
+              );
+            }
+          } catch { }
+        }}
+      />
+    </>
   );
 }
