@@ -143,17 +143,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <head>
+      {/* <head>
         <meta
           name="apple-mobile-web-app-capable"
           content="yes"
         />
 
-        {/* <meta
+        <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
-        /> */}
-      </head>
+        />
+      </head> */}
       <body>
         <QueryProvider>
           <AppProvider>
