@@ -149,10 +149,10 @@ export default function RootLayout({
           content="yes"
         />
 
-        <meta
+        {/* <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
-        />
+        /> */}
       </head>
       <body>
         <QueryProvider>
