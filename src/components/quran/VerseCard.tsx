@@ -2,6 +2,7 @@ import AppCard from "@/components/shared/AppCard";
 import { haptics } from "@/lib/haptics";
 import { copyAyah, shareAyah } from "@/lib/quran-actions";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
+import { Bookmark, Copy, Share } from "lucide-react";
 import { toast } from "sonner";
 
 interface Props {
@@ -126,19 +127,29 @@ export default function VerseCard({
                 }
               }}
               className="
-                  rounded-xl
-                  border
-                  px-3
-                  py-2
-                  text-sm
-                  font-medium
-                  transition
-                  hover:bg-muted
-                "
+                        flex
+                        h-10
+                        w-10
+                        items-center
+                        justify-center
+                        rounded-xl
+                        bg-emerald-500/15
+                        text-emerald-500
+                        transition-all
+                        hover:scale-105
+                        hover:bg-emerald-500/25
+                      "
             >
-              {isBookmarked
-                ? "⭐ Saved"
-                : "🔖 Bookmark"}
+              <Bookmark
+                size={18}
+                strokeWidth={2}
+                className="h-5 w-5"
+                fill={
+                  isBookmarked
+                    ? "currentColor"
+                    : "transparent"
+                }
+              />
             </button>
 
             <button
@@ -153,17 +164,20 @@ export default function VerseCard({
                 );
               }}
               className="
-                rounded-xl
-                border
-                px-3
-                py-2
-                text-sm
-                font-medium
-                transition
-                hover:bg-muted
-              "
+                          flex
+                          h-10
+                          w-10
+                          items-center
+                          justify-center
+                          rounded-xl
+                          bg-sky-500/15
+                          text-sky-500
+                          transition-all
+                          hover:scale-105
+                          hover:bg-sky-500/25
+                        "
             >
-              📋 Copy
+              <Copy size={18} strokeWidth={2} className="h-5 w-5" />
             </button>
             <button
               onClick={async (e) => {
@@ -177,30 +191,33 @@ export default function VerseCard({
                 );
               }}
               className="
-    rounded-xl
-    border
-    px-3
-    py-2
-    text-sm
-    font-medium
-    transition
-    hover:bg-muted
-  "
+                          flex
+                          h-10
+                          w-10
+                          items-center
+                          justify-center
+                          rounded-xl
+                          bg-violet-500/15
+                          text-violet-500
+                          transition-all
+                          hover:scale-105
+                          hover:bg-violet-500/25
+                        "
             >
-              🔗 Share
+              <Share size={18} strokeWidth={2} className="h-5 w-5" />
             </button></div>
         )}
       </div>
       <p
         dir="rtl"
         className="
-          text-right
-          text-3xl
-          leading-loose
-          font-medium
-  text-emerald-900
-  dark:text-emerald-100
-        "
+                  text-right
+                  text-3xl
+                  leading-loose
+                  font-medium
+                text-emerald-900
+                dark:text-emerald-100
+                  "
       >
         {arabic}
       </p>

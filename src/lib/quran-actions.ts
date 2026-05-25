@@ -38,6 +38,7 @@ ${arabic}
 Surah ${chapterNameSimple ?? surahNumber}
 (${surahNumber}:${ayahNumber})
 
+Read on AayatVerse:
 https://aayatverse.com/quran/${surahNumber}?ayah=${ayahNumber}
 `.trim();
 
