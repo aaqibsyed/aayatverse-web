@@ -11,12 +11,14 @@ interface Props {
   surahNumber: number;
   verses: Verse[];
   targetAyah?: number;
+  chapterNameSimple?: string;
 }
 
 export default function StudyMode({
   surahNumber,
   verses,
   targetAyah,
+  chapterNameSimple,
 }: Props) {
   const targetRef =
     useRef<HTMLDivElement | null>(
@@ -70,6 +72,7 @@ export default function StudyMode({
               surahNumber={surahNumber}
               verseNumber={verseNumber}
               arabic={verse.text_uthmani}
+              chapterNameSimple={chapterNameSimple}
             />
           </div>
         )

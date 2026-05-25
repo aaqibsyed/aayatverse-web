@@ -9,20 +9,21 @@ import type { Verse } from "@/features/quran/types/verse.types";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
 import FloatingAyahToolbar from "./FloatingAyahToolbar";
 import { toast } from "sonner";
-import { Chapter } from "@/features/quran/types/chapter.types";
+import { copyAyah, shareAyah } from "@/lib/quran-actions";
+import { haptics } from "@/lib/haptics";
 
 interface Props {
   surahNumber: number;
   verses: Verse[];
   targetAyah?: number;
-  chapter?: Chapter
+  chapterNameSimple?: string
 }
 
 export default function ReadingMode({
   surahNumber,
   verses,
   targetAyah,
-  chapter,
+  chapterNameSimple,
 }: Props) {
 
   const {
@@ -85,19 +86,6 @@ export default function ReadingMode({
           );
 
         if (element) {
-          //   const rect =
-          //     element.getBoundingClientRect();
-
-          //   setToolbarPosition({
-          //     x:
-          //       rect.left +
-          //       rect.width / 2,
-
-          //     y:
-          //       rect.top - 12,
-          //   });
-
-
           const TOOLBAR_WIDTH = 170;
 
           const safeX = Math.min(
@@ -127,9 +115,7 @@ export default function ReadingMode({
           surahNumber,
           ayah
         );
-        if ("vibrate" in navigator) {
-          navigator.vibrate(20);
-        }
+        haptics.longPress()
       }, 500);
   };
 
@@ -165,36 +151,6 @@ export default function ReadingMode({
     surahNumber,
     setActiveAyah,
   ]);
-
-  // useEffect(() => {
-  //   const closeToolbar = () => {
-  //     setSelectedAyah(null);
-  //   };
-
-  //   window.addEventListener(
-  //     "scroll",
-  //     closeToolbar,
-  //     true
-  //   );
-
-  //   document.addEventListener(
-  //     "pointerdown",
-  //     closeToolbar
-  //   );
-
-  //   return () => {
-  //     window.removeEventListener(
-  //       "scroll",
-  //       closeToolbar,
-  //       true
-  //     );
-
-  //     document.removeEventListener(
-  //       "pointerdown",
-  //       closeToolbar
-  //     );
-  //   };
-  // }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -367,7 +323,7 @@ export default function ReadingMode({
               surahNumber,
               selectedAyah
             );
-            navigator.vibrate?.(25);
+            haptics.success()
             toast.success(
               "Bookmark removed"
             );
@@ -376,7 +332,7 @@ export default function ReadingMode({
               surahNumber,
               selectedAyah
             );
-            navigator.vibrate?.(15);
+            haptics.success()
             toast.success(
               "Bookmark added"
             );
@@ -391,23 +347,12 @@ export default function ReadingMode({
 
           const verse =
             verses[selectedAyah - 1];
-
-          const copyText = `
-                            ${verse.text_uthmani}
-
-                            Surah ${chapter?.name_simple ?? surahNumber}
-                            (${surahNumber}:${selectedAyah})
-
-                            AayatVerse.com
-                            `;
-
-          await navigator.clipboard.writeText(
-            copyText.trim()
-          );
-          navigator.vibrate?.(10);
-          toast.success(
-            "Ayah copied"
-          );
+          await copyAyah(
+            verse.text_uthmani,
+            surahNumber,
+            selectedAyah,
+            chapterNameSimple
+          )
 
           setSelectedAyah(null);
         }}
@@ -419,31 +364,12 @@ export default function ReadingMode({
           const verse =
             verses[selectedAyah - 1];
 
-          const shareText = `
-                            ${verse.text_uthmani}
-
-                            Surah ${chapter?.name_simple ?? surahNumber}
-                            (${surahNumber}:${selectedAyah})
-
-                            https://aayatverse.com/quran/${surahNumber}?ayah=${selectedAyah}
-                            `.trim();
-
-          try {
-            if (navigator.share) {
-              await navigator.share({
-                title: "AayatVerse",
-                text: shareText,
-              });
-              setSelectedAyah(null)
-            } else {
-              await navigator.clipboard.writeText(
-                shareText
-              );
-              toast.success(
-                "Share text copied"
-              );
-            }
-          } catch { }
+          await shareAyah(
+            verse.text_uthmani,
+            surahNumber,
+            selectedAyah,
+            chapterNameSimple
+          )
         }}
       />
     </>

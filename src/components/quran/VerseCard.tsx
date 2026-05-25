@@ -1,16 +1,21 @@
 import AppCard from "@/components/shared/AppCard";
+import { haptics } from "@/lib/haptics";
+import { copyAyah, shareAyah } from "@/lib/quran-actions";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
+import { toast } from "sonner";
 
 interface Props {
   surahNumber: number;
   verseNumber: number;
   arabic: string;
+  chapterNameSimple?: string;
 }
 
 export default function VerseCard({
   surahNumber,
   verseNumber,
   arabic,
+  chapterNameSimple,
 }: Props) {
 
   const {
@@ -95,40 +100,97 @@ export default function VerseCard({
           {verseNumber}
         </div>
         {isActive && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
+          <div className="flex gap-2 items-center">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
 
-              if (isBookmarked) {
-                removeBookmark(
+                if (isBookmarked) {
+                  removeBookmark(
+                    surahNumber,
+                    verseNumber
+                  );
+                  toast.success(
+                    "Bookmark removed"
+                  );
+                  haptics.success()
+                } else {
+                  addBookmark(
+                    surahNumber,
+                    verseNumber
+                  );
+                  haptics.success()
+                  toast.success(
+                    "Bookmark added"
+                  );
+                }
+              }}
+              className="
+                  rounded-xl
+                  border
+                  px-3
+                  py-2
+                  text-sm
+                  font-medium
+                  transition
+                  hover:bg-muted
+                "
+            >
+              {isBookmarked
+                ? "⭐ Saved"
+                : "🔖 Bookmark"}
+            </button>
+
+            <button
+              onClick={async (e) => {
+                e.stopPropagation();
+
+                await copyAyah(
+                  arabic,
                   surahNumber,
-                  verseNumber
+                  verseNumber,
+                  chapterNameSimple,
                 );
-              } else {
-                addBookmark(
+              }}
+              className="
+                rounded-xl
+                border
+                px-3
+                py-2
+                text-sm
+                font-medium
+                transition
+                hover:bg-muted
+              "
+            >
+              📋 Copy
+            </button>
+            <button
+              onClick={async (e) => {
+                e.stopPropagation();
+
+                await shareAyah(
+                  arabic,
                   surahNumber,
-                  verseNumber
+                  verseNumber,
+                  chapterNameSimple
                 );
-              }
-            }}
-            className="
-      rounded-xl
-      border
-      px-3
-      py-2
-      text-sm
-      font-medium
-      transition
-      hover:bg-muted
-    "
-          >
-            {isBookmarked
-              ? "⭐ Saved"
-              : "🔖 Bookmark"}
-          </button>
+              }}
+              className="
+    rounded-xl
+    border
+    px-3
+    py-2
+    text-sm
+    font-medium
+    transition
+    hover:bg-muted
+  "
+            >
+              🔗 Share
+            </button></div>
         )}
       </div>
-
       <p
         dir="rtl"
         className="

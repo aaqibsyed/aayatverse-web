@@ -4,6 +4,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group";
+import { haptics } from "@/lib/haptics";
 
 import { useQuranReaderStore } from "@/store/quran-reader-store";
 
@@ -22,7 +23,7 @@ export default function ViewModeToggle() {
         ) {
           setViewMode(value);
         }
-        navigator.vibrate?.(12);
+        haptics.tap()
       }}
     >
       <ToggleGroupItem value="reading">

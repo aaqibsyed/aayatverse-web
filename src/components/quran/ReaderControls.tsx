@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { useQuranReaderStore } from "@/store/quran-reader-store";
+import { haptics } from "@/lib/haptics";
 
 export default function ReaderControls() {
   const {
@@ -32,7 +33,7 @@ export default function ReaderControls() {
           <button
             onClick={()=> {
               decreaseFontSize()
-              navigator.vibrate?.(8);
+              haptics.tap()
             }}
             className="
               rounded-lg
@@ -45,14 +46,14 @@ export default function ReaderControls() {
             <Minus className="h-4 w-4" />
           </button>
 
-          <span className="min-w-[60px] text-center text-sm">
+          <span className="min-w-15 text-center text-sm">
             {fontSize}px
           </span>
 
           <button
             onClick={()=>{
               increaseFontSize()
-              navigator.vibrate?.(12);
+              haptics.tap()
             }}
             className="
               rounded-lg

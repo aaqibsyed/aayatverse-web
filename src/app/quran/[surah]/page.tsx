@@ -92,9 +92,9 @@ export default function SurahPage() {
             />
 
             {viewMode === "reading" ? (
-                <ReadingMode surahNumber={chapterId} verses={data?.verses ?? []} targetAyah={targetAyah} chapter={chapter} />
+                <ReadingMode surahNumber={chapterId} verses={data?.verses ?? []} targetAyah={targetAyah} chapterNameSimple={chapter?.name_simple} />
             ) : (
-                <StudyMode surahNumber={chapterId} verses={data?.verses ?? []} targetAyah={targetAyah} />
+                <StudyMode surahNumber={chapterId} verses={data?.verses ?? []} targetAyah={targetAyah} chapterNameSimple={chapter?.name_simple} />
             )}
         </main>
     );
