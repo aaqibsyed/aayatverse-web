@@ -179,31 +179,56 @@ export default function ReadingMode({
       <div
         dir="rtl"
         className="
-        rounded-3xl
-          border
-          bg-linear-to-b
-        from-white
-        to-slate-50
-        dark:from-card
-        dark:to-card
-          p-4
-          sm:p-8
-          md:p-10
-          text-right
-          text-3xl
-          sm:text-4xl
-          md:text-5xl
-          leading-20
-          font-medium
-          text-emerald-900
-          dark:text-emerald-100
-          select-none
+                  rounded-3xl
+                    border
+                    bg-linear-to-b
+                  from-white
+                  to-slate-50
+                  dark:from-card
+                  dark:to-card
+                    p-4
+                    sm:p-8
+                    md:p-10
+                    text-right
+                    text-3xl
+                    sm:text-4xl
+                    md:text-5xl
+                    leading-20
+                    font-medium
+                    text-emerald-900
+                    dark:text-emerald-100
+                    select-none
               "
         style={{
           fontSize: `${fontSize}px`,
           lineHeight: "2",
         }}
       >
+        {surahNumber !== 1 &&
+          surahNumber !== 9 && (
+            <>
+              <div
+                className="
+                      text-4xl
+                      text-emerald-700
+                      dark:text-emerald-300
+                      text-center
+                    "
+              >
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              </div>
+              <div
+                className="
+                          text-center
+                          text-emerald-500
+                          dark:text-emerald-300
+                          text-xl
+                        "
+              >
+                ❈────────────❈
+              </div>
+            </>
+          )}
         {verses.map((verse, index) => {
           const verseNumber = index + 1;
 
