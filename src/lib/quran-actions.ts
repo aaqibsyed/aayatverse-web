@@ -97,12 +97,27 @@ export async function shareVerseImage(
       files: [file],
     })
   ) {
-    await navigator.share({
-      files: [file],
-      title: "AayatVerse",
-    });
+    try {
+      await navigator.share({
+        files: [file],
+        title: "AayatVerse",
+      });
 
-    return;
+      return;
+    } catch (error) {
+      if (
+        error instanceof DOMException &&
+        error.name === "AbortError"
+      ) {
+        return;
+      }
+
+      console.error(error);
+
+      toast.error(
+        "Unable to share image"
+      );
+    }
   }
 
   const url =

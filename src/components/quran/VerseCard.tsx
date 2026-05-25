@@ -1,9 +1,11 @@
 import AppCard from "@/components/shared/AppCard";
 import { haptics } from "@/lib/haptics";
-import { copyAyah, shareAyah } from "@/lib/quran-actions";
+import { copyAyah, shareAyah, shareVerseImage } from "@/lib/quran-actions";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
 import { Bookmark, Copy, ImageIcon, Share } from "lucide-react";
+import { useRef } from "react";
 import { toast } from "sonner";
+import ShareVerseCard from "./ShareVerseCard";
 
 interface Props {
   surahNumber: number;
@@ -18,6 +20,9 @@ export default function VerseCard({
   arabic,
   chapterNameSimple,
 }: Props) {
+
+  const shareCardRef =
+    useRef<HTMLDivElement>(null);
 
   const {
     activeAyah,
@@ -207,11 +212,25 @@ export default function VerseCard({
               <Share size={18} strokeWidth={2} className="h-5 w-5" />
             </button>
             <button
-                onClick={()=>{
-                  
-                  
-                }}
-                className="
+              onClick={async () => {
+                if (!shareCardRef.current) {
+                  return;
+                }
+
+                try {
+                  await shareVerseImage(
+                    shareCardRef.current,
+                    `ayah-${surahNumber}-${verseNumber}.png`
+                  );
+                } catch (error) {
+                  console.error(
+                    "Image share failed",
+                    error
+                  );
+                }
+
+              }}
+              className="
                             flex
                             h-10
                             w-10
@@ -225,11 +244,11 @@ export default function VerseCard({
                             hover:bg-pink-500/25
                         "
             >
-                <ImageIcon
-                    size={18}
-                    strokeWidth={2}
-                    className="h-4 w-4"
-                />
+              <ImageIcon
+                size={18}
+                strokeWidth={2}
+                className="h-4 w-4"
+              />
             </button>
           </div>
         )}
@@ -247,6 +266,28 @@ export default function VerseCard({
       >
         {arabic}
       </p>
+      <div
+        className="
+                  fixed
+                  -left-[9999px]
+                  top-0
+                  pointer-events-none
+                "
+      >
+        <div ref={shareCardRef}>
+          <ShareVerseCard
+            arabic={
+              arabic
+            }
+            surahName={
+              chapterNameSimple ??
+              `Surah ${surahNumber}`
+            }
+            surahNumber={surahNumber}
+            ayahNumber={verseNumber}
+          />
+        </div>
+      </div>
     </AppCard >
   );
 }

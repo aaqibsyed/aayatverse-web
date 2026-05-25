@@ -379,21 +379,28 @@ export default function ReadingMode({
             return;
           }
 
-          await shareVerseImage(
-            shareCardRef.current,
-            `ayah-${surahNumber}-${selectedAyah}.png`
-          );
+          try {
+            await shareVerseImage(
+              shareCardRef.current,
+              `ayah-${surahNumber}-${selectedAyah}.png`
+            );
+          } catch (error) {
+            console.error(
+              "Image share failed",
+              error
+            );
+          }
 
           setSelectedAyah(null);
         }}
       />
       <div
         className="
-    fixed
-    -left-[9999px]
-    top-0
-    pointer-events-none
-  "
+                  fixed
+                  -left-[9999px]
+                  top-0
+                  pointer-events-none
+                "
       >
         {selectedAyah !== null && (
           <div ref={shareCardRef}>
