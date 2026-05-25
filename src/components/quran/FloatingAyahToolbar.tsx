@@ -3,6 +3,7 @@
 import {
     Bookmark,
     Copy,
+    ImageIcon,
     Share2,
 } from "lucide-react";
 
@@ -19,6 +20,8 @@ interface Props {
     onCopy: () => void;
 
     onShare: () => void;
+
+    onShareImage: () => void
 }
 
 export default function FloatingAyahToolbar({
@@ -29,6 +32,7 @@ export default function FloatingAyahToolbar({
     onBookmark,
     onCopy,
     onShare,
+    onShareImage,
 }: Props) {
     if (!visible) {
         return null;
@@ -129,6 +133,28 @@ export default function FloatingAyahToolbar({
                     size={18}
                     strokeWidth={2}
                     className="h-5 w-5"
+                />
+            </button>
+            <button
+                onClick={onShareImage}
+                className="
+                            flex
+                            h-10
+                            w-10
+                            items-center
+                            justify-center
+                            rounded-xl
+                            bg-pink-500/15
+                            text-pink-500
+                            transition-all
+                            hover:scale-105
+                            hover:bg-pink-500/25
+                        "
+            >
+                <ImageIcon
+                    size={18}
+                    strokeWidth={2}
+                    className="h-4 w-4"
                 />
             </button>
         </div>

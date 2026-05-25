@@ -1,5 +1,7 @@
 import { toast } from "sonner";
 import { haptics } from "./haptics";
+import { toBlob } from "html-to-image";
+
 
 export async function copyAyah(
   arabic: string,
@@ -57,5 +59,61 @@ https://aayatverse.com/quran/${surahNumber}?ayah=${ayahNumber}
         "Share text copied"
       );
     }
-  } catch {}
+  } catch { }
+}
+
+
+export async function shareVerseImage(
+  element: HTMLElement,
+  fileName: string
+) {
+  console.log(element);
+  console.log(
+    element?.offsetWidth,
+    element?.offsetHeight
+  );
+  await document.fonts.ready;
+
+  const blob = await toBlob(element, {
+    cacheBust: true,
+  });
+
+  if (!blob) {
+    throw new Error(
+      "Failed to generate image"
+    );
+  }
+
+  const file = new File(
+    [blob],
+    fileName,
+    {
+      type: "image/png",
+    }
+  );
+
+  if (
+    navigator.canShare?.({
+      files: [file],
+    })
+  ) {
+    await navigator.share({
+      files: [file],
+      title: "AayatVerse",
+    });
+
+    return;
+  }
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+  link.download = fileName;
+  link.click();
+
+  URL.revokeObjectURL(url);
 }

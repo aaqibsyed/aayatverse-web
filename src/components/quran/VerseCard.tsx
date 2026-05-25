@@ -2,7 +2,7 @@ import AppCard from "@/components/shared/AppCard";
 import { haptics } from "@/lib/haptics";
 import { copyAyah, shareAyah } from "@/lib/quran-actions";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
-import { Bookmark, Copy, Share } from "lucide-react";
+import { Bookmark, Copy, ImageIcon, Share } from "lucide-react";
 import { toast } from "sonner";
 
 interface Props {
@@ -205,7 +205,33 @@ export default function VerseCard({
                         "
             >
               <Share size={18} strokeWidth={2} className="h-5 w-5" />
-            </button></div>
+            </button>
+            <button
+                onClick={()=>{
+                  
+                  
+                }}
+                className="
+                            flex
+                            h-10
+                            w-10
+                            items-center
+                            justify-center
+                            rounded-xl
+                            bg-pink-500/15
+                            text-pink-500
+                            transition-all
+                            hover:scale-105
+                            hover:bg-pink-500/25
+                        "
+            >
+                <ImageIcon
+                    size={18}
+                    strokeWidth={2}
+                    className="h-4 w-4"
+                />
+            </button>
+          </div>
         )}
       </div>
       <p

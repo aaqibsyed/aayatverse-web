@@ -9,8 +9,9 @@ import type { Verse } from "@/features/quran/types/verse.types";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
 import FloatingAyahToolbar from "./FloatingAyahToolbar";
 import { toast } from "sonner";
-import { copyAyah, shareAyah } from "@/lib/quran-actions";
+import { copyAyah, shareAyah, shareVerseImage } from "@/lib/quran-actions";
 import { haptics } from "@/lib/haptics";
+import ShareVerseCard from "./ShareVerseCard";
 
 interface Props {
   surahNumber: number;
@@ -25,6 +26,9 @@ export default function ReadingMode({
   targetAyah,
   chapterNameSimple,
 }: Props) {
+
+  const shareCardRef =
+    useRef<HTMLDivElement>(null);
 
   const {
     fontSize,
@@ -126,7 +130,6 @@ export default function ReadingMode({
       );
     }
   };
-
 
 
   useEffect(() => {
@@ -371,7 +374,44 @@ export default function ReadingMode({
             chapterNameSimple
           )
         }}
+        onShareImage={async () => {
+          if (!shareCardRef.current) {
+            return;
+          }
+
+          await shareVerseImage(
+            shareCardRef.current,
+            `ayah-${surahNumber}-${selectedAyah}.png`
+          );
+
+          setSelectedAyah(null);
+        }}
       />
+      <div
+        className="
+    fixed
+    -left-[9999px]
+    top-0
+    pointer-events-none
+  "
+      >
+        {selectedAyah !== null && (
+          <div ref={shareCardRef}>
+            <ShareVerseCard
+              arabic={
+                verses[selectedAyah - 1]
+                  .text_uthmani
+              }
+              surahName={
+                chapterNameSimple ??
+                `Surah ${surahNumber}`
+              }
+              surahNumber={surahNumber}
+              ayahNumber={selectedAyah}
+            />
+          </div>
+        )}
+      </div>
     </>
   );
 }
