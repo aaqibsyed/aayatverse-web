@@ -26,6 +26,14 @@ html {
   scrollbar-gutter: stable;
 }
 
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

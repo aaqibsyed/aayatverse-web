@@ -7,6 +7,7 @@ import BetaBanner from "@/components/homeV2/BetaBanner";
 import ContinueReadingCard from "@/components/homeV2/ContinueReadingV2";
 import VerseOfTheDayCard from "@/components/homeV2/VerseOfTheDayCard";
 import QuickAccessGrid from "@/components/homeV2/QuickAccessGrid";
+import RecentlyReadSection from "@/components/homeV2/RecentlyReadSection";
 
 export default function HomePage() {
   return (
@@ -45,6 +46,9 @@ export default function HomePage() {
           </section>
           <section className="mt-4">
             <QuickAccessGrid />
+          </section>
+          <section className="mt-4">
+            <RecentlyReadSection />
           </section>
         </section>
       </main>
