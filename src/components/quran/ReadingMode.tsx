@@ -238,6 +238,7 @@ export default function ReadingMode({
           font-medium
           text-emerald-900
           dark:text-emerald-100
+          select-none
               "
         style={{
           fontSize: `${fontSize}px`,
