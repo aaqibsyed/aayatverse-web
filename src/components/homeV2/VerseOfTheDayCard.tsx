@@ -38,7 +38,6 @@ export default function VerseOfTheDayCard({
     return (
         <div
             className="
-                        mt-4
                         relative
                         overflow-hidden
 
@@ -165,7 +164,7 @@ export default function VerseOfTheDayCard({
 
                             text-center
 
-                            text-5xl
+                            text-3xl
                             md:text-6xl
                             leading-loose
 

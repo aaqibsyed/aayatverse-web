@@ -6,6 +6,7 @@ import ContinueReading from "@/components/home/ContinueReading";
 import BetaBanner from "@/components/homeV2/BetaBanner";
 import ContinueReadingCard from "@/components/homeV2/ContinueReadingV2";
 import VerseOfTheDayCard from "@/components/homeV2/VerseOfTheDayCard";
+import QuickAccessGrid from "@/components/homeV2/QuickAccessGrid";
 
 export default function HomePage() {
   return (
@@ -33,13 +34,18 @@ export default function HomePage() {
         "
         >
           <ContinueReadingCard />
-          <VerseOfTheDayCard
-            arabic="إِنَّ مَعَ الْعُسْرِ يُسْرًا"
-            translation="Indeed, with hardship comes ease."
-            surahName="Ash-Sharh"
-            surahNumber={94}
-            ayahNumber={6}
-          />
+          <section className="mt-4">
+            <VerseOfTheDayCard
+              arabic="إِنَّ مَعَ الْعُسْرِ يُسْرًا"
+              translation="Indeed, with hardship comes ease."
+              surahName="Ash-Sharh"
+              surahNumber={94}
+              ayahNumber={6}
+            />
+          </section>
+          <section className="mt-4">
+            <QuickAccessGrid />
+          </section>
         </section>
       </main>
     </>
