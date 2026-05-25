@@ -3,11 +3,15 @@ import VerseCard from "@/components/home/VerseCard";
 import PrayerPreview from "@/components/home/PrayerPreview";
 import Features from "@/components/home/Features";
 import ContinueReading from "@/components/home/ContinueReading";
+import BetaBanner from "@/components/homeV2/BetaBanner";
+import ContinueReadingCard from "@/components/homeV2/ContinueReadingV2";
+import VerseOfTheDayCard from "@/components/homeV2/VerseOfTheDayCard";
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      {/* HomePage Version one V1 */}
+      {/* <Hero />
       <ContinueReading />
 
       <section className="mx-auto max-w-7xl px-6 py-20">
@@ -16,8 +20,28 @@ export default function HomePage() {
           <PrayerPreview />
         </div>
       </section>
-
-      <Features />
+      <Features /> */}
+      {/* HomePage Version two V2 */}
+      <main>
+        <BetaBanner />
+        <section
+          className="
+          mx-auto
+          max-w-7xl
+          px-4
+          py-6
+        "
+        >
+          <ContinueReadingCard />
+          <VerseOfTheDayCard
+            arabic="إِنَّ مَعَ الْعُسْرِ يُسْرًا"
+            translation="Indeed, with hardship comes ease."
+            surahName="Ash-Sharh"
+            surahNumber={94}
+            ayahNumber={6}
+          />
+        </section>
+      </main>
     </>
   );
 }
