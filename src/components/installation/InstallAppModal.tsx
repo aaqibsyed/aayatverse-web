@@ -60,9 +60,9 @@ export default function InstallAppModal({
           w-[95vw]
           max-w-2xl
 
-          h-[72vh]
+          max-h-[85dvh]
 
-          overflow-hidden
+         
 
           rounded-3xl
 
@@ -204,7 +204,8 @@ export default function InstallAppModal({
                   items-center
                   justify-center
 
-                  h-[38vh]
+                  h-[260px]
+                  sm:h-[420px]
 
                   overflow-hidden
 
@@ -224,7 +225,7 @@ export default function InstallAppModal({
                   height={600}
                   priority
                   className="
-                    max-h-full
+                    h-full
                     w-auto
 
                     object-contain
