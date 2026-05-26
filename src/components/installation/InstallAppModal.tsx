@@ -173,7 +173,7 @@ export default function InstallAppModal({
               </p>
 
               {/* Navigation */}
-              <div className="mt-2 flex items-center justify-between">
+              <div className="mt-4 flex items-center justify-between">
                 <button
                   disabled={isFirst}
                   onClick={() => setStep((prev) => prev - 1)}

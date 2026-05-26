@@ -25,14 +25,14 @@ export const installGuides = {
       step: 4,
       title: "Install App",
       description:
-        "Tap Install when Chrome shows the installation prompt.",
+        "Tap Install button.",
       image: "/install/s4.jpg",
     },
     {
       step: 5,
       title: "Done",
       description:
-        "AayatVerse now appears on your home screen like a native app.",
+        "The app now appears on your Home Screen.",
       image: "/install/s5.jpg",
     },
   ],
@@ -70,7 +70,7 @@ export const installGuides = {
       step: 5,
       title: "View More",
       description:
-        'If needed, tap View More to reveal additional actions.',
+        'If needed, tap View More.',
       image: "/install/ip5.jpg",
     },
     {
