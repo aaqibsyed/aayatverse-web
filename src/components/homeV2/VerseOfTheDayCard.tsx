@@ -351,7 +351,7 @@ export default function VerseOfTheDayCard({
                     Image
                 </button>
             </div>
-            <div className="mt-4 flex justify-center">
+            <div className="mt-4 flex justify-center ">
                 <Link
                     href={`/quran/${surahNumber}?ayah=${ayahNumber}`}
                     className="
@@ -360,13 +360,15 @@ export default function VerseOfTheDayCard({
                             gap-2
 
                             font-medium
-
+                            hover:translate-x-1 
+                            transition-transform
+                            duration-300
                             text-emerald-600
                             hover:text-emerald-700
                             rounded-full
 
                             bg-emerald-500/10
-
+                            shadow-emerald-500/20 hover:shadow-xl
                             px-5
                             py-3
                             "

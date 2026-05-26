@@ -189,6 +189,11 @@ export default function ContinueReadingCard() {
                 bg-emerald-600
 
                 hover:bg-emerald-700
+                hover:translate-x-1
+                transition-transform
+                duration-300
+                shadow-emerald-500/20 
+                hover:shadow-xl
               "
             >
               <Link
@@ -260,6 +265,8 @@ export default function ContinueReadingCard() {
                 bg-emerald-600
 
                 hover:bg-emerald-700
+                hover:translate-x-1
+                transition-transform
               "
             >
               <Link href="/quran">

@@ -107,7 +107,7 @@ export default function ShareVerseCard({
             fontWeight: 700,
           }}
         >
-          AAYATVERSE
+          AAYATVERSE.COM
         </div>
       </div>
     </div>

@@ -35,6 +35,7 @@ interface QuranReaderState {
   lastReadSurah: number | null;
   lastReadAyah: number | null;
 
+  recentlyRead: number[],
 
 
 
@@ -79,10 +80,10 @@ export const useQuranReaderStore =
 
         bookmarks: [],
 
+        recentlyRead: [],
 
-        
 
-          
+
 
         setActiveAyah: (
           surah,
@@ -98,10 +99,18 @@ export const useQuranReaderStore =
           surah,
           ayah
         ) =>
-          set({
+          set((state) => ({
             lastReadSurah: surah,
             lastReadAyah: ayah,
-          }),
+
+            recentlyRead: [
+              surah,
+
+              ...state.recentlyRead.filter(
+                (id) => id !== surah
+              ),
+            ].slice(0, 10),
+          })),
 
         addBookmark: (
           surah,
@@ -179,6 +188,8 @@ export const useQuranReaderStore =
             state.lastReadAyah,
 
           bookmarks: state.bookmarks,
+          recentlyRead:
+            state.recentlyRead,
         }),
       }
     )
