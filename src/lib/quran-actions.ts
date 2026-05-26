@@ -47,7 +47,7 @@ https://aayatverse.com/quran/${surahNumber}?ayah=${ayahNumber}
   try {
     if (navigator.share) {
       await navigator.share({
-        title: "Shared from: AayatVerse.com",
+        title: "Shared via: AayatVerse.com",
         text,
       });
     } else {
@@ -100,7 +100,7 @@ export async function shareVerseImage(
     try {
       await navigator.share({
         files: [file],
-        title: "Shared from: AayatVerse.com",
+        title: "Shared via: AayatVerse.com",
       });
 
       return;

@@ -60,9 +60,9 @@ export default function InstallAppModal({
           w-[95vw]
           max-w-2xl
 
-          max-h-[85dvh]
+          max-h-[calc(100dvh-140px)]
 
-         
+         overflow-hidden
 
           rounded-3xl
 
@@ -204,8 +204,9 @@ export default function InstallAppModal({
                   items-center
                   justify-center
 
-                  h-[260px]
-                  sm:h-[420px]
+                  h-[32vh]
+                  max-h-[340px]
+                  min-h-[220px]
 
                   overflow-hidden
 
@@ -236,7 +237,7 @@ export default function InstallAppModal({
               {/* Description */}
               <p
                 className="
-                  mt-5
+                  mt-2
 
                   text-center
 
@@ -249,11 +250,14 @@ export default function InstallAppModal({
               {/* Navigation */}
               <div
                 className="
-                  mt-8
+                  mt-2
 
                   flex
                   items-center
                   justify-between
+                  sticky
+                  bottom-0
+                  shrink-0
                 "
               >
                 <button
