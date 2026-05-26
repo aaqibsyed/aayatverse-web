@@ -19,14 +19,14 @@ export default function ContinueReadingCard() {
     lastReadAyah,
   } = useQuranReaderStore();
 
-  const {data} = useChapters()
+  const { data } = useChapters()
 
   const chapter =
     lastReadSurah
       ? data?.chapters.find(
-          (chapter) =>
-            chapter.id === lastReadSurah
-        )
+        (chapter) =>
+          chapter.id === lastReadSurah
+      )
       : null;
 
   const hasLastRead =
@@ -73,7 +73,7 @@ export default function ContinueReadingCard() {
 
           rounded-full
 
-          bg-emerald-500
+          bg-emerald-500/30
 
           blur-3xl
         "
@@ -135,7 +135,7 @@ export default function ContinueReadingCard() {
               "
             >
               <span className="text-slate-600
-                dark:text-slate-400">Surah </span> 
+                dark:text-slate-400">Surah </span>
               {chapter?.name_simple ??
                 `Surah ${lastReadSurah}`}
             </h2>
@@ -144,13 +144,14 @@ export default function ContinueReadingCard() {
               className="
                 mt-1
 
-                text-lg
+                text-sm
 
                 text-slate-600
                 dark:text-slate-400
               "
             >
-              Ayah {lastReadAyah}
+              Ayah {lastReadAyah} of{" "}
+              {chapter?.verses_count}
             </p>
 
             <p
@@ -165,6 +166,7 @@ export default function ContinueReadingCard() {
             >
               Continue where you left off.
             </p>
+
 
             <div
               className="
@@ -226,7 +228,7 @@ export default function ContinueReadingCard() {
                 dark:text-slate-50
               "
             >
-              Begin Your Journey
+              Open the Quran
             </h2>
 
             <p

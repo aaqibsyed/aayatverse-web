@@ -13,98 +13,221 @@ export default function ShareVerseCard({
   surahNumber,
   ayahNumber,
 }: Props) {
+  const arabicFontSize =
+    arabic.length > 320
+      ? 40
+      : arabic.length > 240
+        ? 48
+        : arabic.length > 160
+          ? 56
+          : arabic.length > 100
+            ? 64
+            : 72;
+
   return (
     <div
       style={{
         width: 1080,
         height: 1080,
+
+        position: "relative",
+
+        overflow: "hidden",
+
         background:
-          "linear-gradient(135deg,#065f46 0%,#10b981 50%,#f59e0b 100%)",
-        backgroundImage:
-          "radial-gradient(rgba(255,255,255,.08) 2px, transparent 2px)",
-        backgroundSize:
-          "40px 40px",
+          "linear-gradient(135deg,#064e3b 0%,#047857 50%,#10b981 100%)",
+
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+
         padding: 60,
       }}
     >
+      {/* Top Glow */}
+      <div
+        style={{
+          position: "absolute",
+
+          top: -150,
+          right: -150,
+
+          width: 500,
+          height: 500,
+
+          borderRadius: "50%",
+
+          background:
+            "rgba(255,255,255,0.08)",
+
+          filter: "blur(90px)",
+        }}
+      />
+
+      {/* Bottom Glow */}
+      <div
+        style={{
+          position: "absolute",
+
+          left: -200,
+          bottom: -200,
+
+          width: 650,
+          height: 650,
+
+          borderRadius: "50%",
+
+          background:
+            "rgba(245,158,11,0.18)",
+
+          filter: "blur(120px)",
+        }}
+      />
+
+      {/* Main Card */}
       <div
         style={{
           width: "100%",
           height: "100%",
+
+          position: "relative",
+
+          overflow: "hidden",
+
           background:
-            "rgba(255,255,255,0.96)",
-          borderRadius: 48,
+            "rgba(255,255,255,0.97)",
+
+          borderRadius: 52,
+
           boxShadow:
-            "0 30px 100px rgba(0,0,0,.15)",
+            "0 40px 120px rgba(0,0,0,.18)",
+
           padding: 80,
+
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          textAlign: "center",
+          alignItems: "center",
         }}
       >
+        {/* Watermark */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+
+            fontSize: 520,
+
+            color: "#059669",
+
+            opacity: 0.03,
+
+            pointerEvents: "none",
+
+            userSelect: "none",
+          }}
+        >
+          ۞
+        </div>
+
+        {/* Bismillah */}
         <div
           dir="rtl"
           style={{
-            fontSize: 70,
+            fontSize: 120,
+
             color: "#059669",
-            marginBottom: 40,
+
+            lineHeight: 1,
+
+            marginTop: 10,
           }}
         >
           ﷽
         </div>
+
         <div
           style={{
-            width: 250,
+            width: 260,
             height: 2,
+
             background: "#10b981",
-            margin:
-              "0 auto 60px auto",
+
+            marginTop: 16,
+            marginBottom: 40,
           }}
         />
+
+        {/* Ayah */}
         <div
           dir="rtl"
           style={{
-            fontSize: 72,
-            lineHeight: 2,
-            minHeight: 250,
+            flex: 1,
+
+            width: "100%",
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+
+            textAlign: "center",
+
             color: "#064e3b",
+
+            fontSize: arabicFontSize,
+
+            lineHeight: 1.9,
+
             fontWeight: 500,
-            marginBottom: 60,
+
+            paddingLeft: 40,
+            paddingRight: 40,
+
+            wordBreak: "break-word",
           }}
         >
           {arabic}
         </div>
         <div
           style={{
-            width: 250,
+            width: 260,
             height: 2,
+
             background: "#10b981",
-            margin:
-              "0 auto 50px auto",
+
+            marginTop: 30,
+            marginBottom: 35,
           }}
         />
+
+        {/* Reference */}
         <div
           style={{
-            fontSize: 32,
-            color: "#047857",
-            fontWeight: 600,
+            fontSize: 34,
+
+            fontWeight: 700,
+
+            color: "#065f46",
           }}
         >
-          Surah {surahName}
-          {" • "}
-          {surahNumber}:{ayahNumber}
+          {surahName} • {surahNumber}:{ayahNumber}
         </div>
+
+        {/* Brand */}
         <div
           style={{
-            marginTop: 80,
+            marginTop: 32,
+
             fontSize: 28,
-            letterSpacing: 4,
+
+            fontWeight: 800,
+
+            letterSpacing: 6,
+
             color: "#10b981",
-            fontWeight: 700,
           }}
         >
           AAYATVERSE.COM

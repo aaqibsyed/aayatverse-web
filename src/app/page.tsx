@@ -8,6 +8,8 @@ import ContinueReadingCard from "@/components/homeV2/ContinueReadingV2";
 import VerseOfTheDayCard from "@/components/homeV2/VerseOfTheDayCard";
 import QuickAccessGrid from "@/components/homeV2/QuickAccessGrid";
 import RecentlyReadSection from "@/components/homeV2/RecentlyReadSection";
+import VerseOfTheDaySection from "@/components/homeV2/VerseOfTheDaySection";
+
 
 export default function HomePage() {
   return (
@@ -24,6 +26,7 @@ export default function HomePage() {
       </section>
       <Features /> */}
       {/* HomePage Version two V2 */}
+
       <main>
         <BetaBanner />
         <section
@@ -36,13 +39,7 @@ export default function HomePage() {
         >
           <ContinueReadingCard />
           <section className="mt-4">
-            <VerseOfTheDayCard
-              arabic="إِنَّ مَعَ الْعُسْرِ يُسْرًا"
-              translation="Indeed, with hardship comes ease."
-              surahName="Ash-Sharh"
-              surahNumber={94}
-              ayahNumber={6}
-            />
+            <VerseOfTheDaySection />
           </section>
           <section className="mt-4">
             <QuickAccessGrid />

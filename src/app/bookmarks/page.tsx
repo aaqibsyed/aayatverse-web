@@ -69,7 +69,19 @@ export default function BookmarksPage() {
             </div>
 
             {sortedBookmarks.length === 0 && (
-                <AppCard className="p-10 text-center">
+                <AppCard className="p-10 text-center bg-gradient-to-br
+                  from-white
+                  via-emerald-50/50
+                  to-amber-50/40
+
+                  dark:from-slate-900
+                  dark:via-slate-900
+                  dark:to-slate-800
+                   border
+                  border-emerald-100
+
+                  dark:border-slate-800
+                  ">
                     <h2 className="text-2xl font-semibold">
                         No Bookmarks Yet
                     </h2>

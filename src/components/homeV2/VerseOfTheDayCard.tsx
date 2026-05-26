@@ -16,6 +16,7 @@ interface Props {
     surahName: string;
     surahNumber: number;
     ayahNumber: number;
+    isBookmarked?: boolean
 
     onBookmark?: () => void;
     onCopy?: () => void;
@@ -29,6 +30,7 @@ export default function VerseOfTheDayCard({
     surahName,
     surahNumber,
     ayahNumber,
+    isBookmarked,
 
     onBookmark,
     onCopy,
@@ -111,7 +113,7 @@ export default function VerseOfTheDayCard({
                 tracking-[0.2em]
                 text-emerald-500
                 ">
-                    Daily Reflection
+                    Daily Reflection • {new Date().toLocaleDateString()}
                 </p>
 
                 <h3 className="
@@ -125,7 +127,6 @@ export default function VerseOfTheDayCard({
             <div
                 className="
                             mt-4
-                            md:mt-0
                             mx-auto
                             max-w-3xl
                             rounded-[28px]
@@ -165,7 +166,7 @@ export default function VerseOfTheDayCard({
                             text-center
 
                             text-3xl
-                            md:text-6xl
+                            md:text-5xl
                             leading-loose
 
                             font-medium
@@ -265,10 +266,17 @@ export default function VerseOfTheDayCard({
                                 hover:scale-105
                                 hover:bg-emerald-50
                                 dark:hover:bg-slate-700
+                                text-emerald-600
+                                bg-emerald-50
+
+                                dark:text-emerald-400
+                                dark:bg-emerald-500/10
                                 "
                 >
-                    <Bookmark className="h-5 w-5" />
-                    Save
+                    <Bookmark className="h-5 w-5" fill={isBookmarked
+                        ? "currentColor"
+                        : "none"} />
+                    
                 </button>
                 <button
                     onClick={onCopy}
@@ -292,10 +300,15 @@ export default function VerseOfTheDayCard({
                                 hover:scale-105
                                 hover:bg-emerald-50
                                 dark:hover:bg-slate-700
+                                text-emerald-600
+                                bg-emerald-50
+
+                                dark:text-emerald-400
+                                dark:bg-emerald-500/10
                                 "
                 >
                     <Copy className="h-5 w-5" />
-                    Copy
+                    
                 </button>
                 <button
                     onClick={onShare}
@@ -318,10 +331,15 @@ export default function VerseOfTheDayCard({
                                 hover:scale-105
                                 hover:bg-emerald-50
                                 dark:hover:bg-slate-700
+                                text-emerald-600
+                                bg-emerald-50
+
+                                dark:text-emerald-400
+                                dark:bg-emerald-500/10
                                 "
                 >
                     <Share2 className="h-5 w-5" />
-                    Share
+                    
                 </button>
                 <button
                     onClick={onShareImage}
@@ -345,10 +363,15 @@ export default function VerseOfTheDayCard({
                                 hover:scale-105
                                 hover:bg-emerald-50
                                 dark:hover:bg-slate-700
+                                text-emerald-600
+                                bg-emerald-50
+
+                                dark:text-emerald-400
+                                dark:bg-emerald-500/10
                                 "
                 >
                     <ImageIcon className="h-5 w-5" />
-                    Image
+                    
                 </button>
             </div>
             <div className="mt-4 flex justify-center ">
