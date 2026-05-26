@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import {  useState } from "react";
 import Link from "next/link";
-import { Menu, X, BookOpen, ScrollText, Clock3, HandHeart, CalendarDays, Coins, Bookmark } from "lucide-react";
+import { Menu, X, BookOpen, ScrollText, Clock3, HandHeart, CalendarDays, Coins, Bookmark, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import ThemeToggle from "./ThemeToggle";
+import InstallAppModal from "../installation/InstallAppModal";
 
 const links = [
     {
@@ -50,15 +51,51 @@ const links = [
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const pathname = usePathname();
+    const [installModalOpen, setInstallModalOpen] =
+        useState(false);
+    const [isStandalone] = useState(() => {
+        if (typeof window === "undefined") {
+            return false;
+        }
+
+        return window.matchMedia(
+            "(display-mode: standalone)"
+        ).matches;
+    });
     return (
         <>
+
             <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
                 <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-                    <Link href="/" className="text-2xl font-bold tracking-tight">
-                        Aayat
-                        <span className="text-emerald-600">Verse</span>
-                    </Link>
+                    <div className="flex gap-2">
+                        <Link href="/" className="text-2xl font-bold tracking-tight">
+                            Aayat
+                            <span className="text-emerald-600">Verse</span>
+                        </Link>
+                        {!isStandalone && (<button
+                            onClick={() =>
+                                setInstallModalOpen(true)
+                            }
+                            className="
+                                        flex
+                                        h-10
+                                        w-10
 
+                                        items-center
+                                        justify-center
+
+                                        rounded-full
+
+                                        border
+
+                                        hover:bg-muted
+                                    "
+                        >
+                            <Download
+                                className="h-5 w-5"
+                            />
+                        </button>)}
+                    </div>
                     {/* Desktop Navigation */}
                     <nav className="hidden items-center gap-6 md:flex">
                         {links.map((link) => {
@@ -180,6 +217,12 @@ export default function Navbar() {
                     </nav>
                 </div>
             )}
+            <InstallAppModal
+                open={installModalOpen}
+                onClose={() =>
+                    setInstallModalOpen(false)
+                }
+            />
         </>
     );
 }
