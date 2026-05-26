@@ -69,7 +69,7 @@ export default function InstallAppModal({
           p-0
         "
       >
-        <div className="flex h-full flex-col">
+        <div className="flex h-full min-h-0 flex-col">
           {/* Header */}
           <DialogHeader
             className="
@@ -102,7 +102,7 @@ export default function InstallAppModal({
           <div
             className="
               flex-1
-
+              min-h-0
               overflow-y-auto
             "
           >
@@ -255,9 +255,6 @@ export default function InstallAppModal({
                   flex
                   items-center
                   justify-between
-                  sticky
-                  bottom-0
-                  shrink-0
                 "
               >
                 <button
