@@ -2,7 +2,7 @@
 
 import {  useState } from "react";
 import Link from "next/link";
-import { Menu, X, BookOpen, ScrollText, Clock3, HandHeart, CalendarDays, Coins, Bookmark, Download } from "lucide-react";
+import { Menu, X, BookOpen, ScrollText, Clock3, HandHeart, CalendarDays, Coins, Bookmark, Download, House } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -11,6 +11,11 @@ import ThemeToggle from "./ThemeToggle";
 import InstallAppModal from "../installation/InstallAppModal";
 
 const links = [
+    {
+        href: "/",
+        label: "Home",
+        icon: House,
+    },
     {
         href: "/quran",
         label: "Quran",
