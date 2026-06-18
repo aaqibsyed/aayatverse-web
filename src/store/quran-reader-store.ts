@@ -35,6 +35,9 @@ interface QuranReaderState {
   lastReadSurah: number | null;
   lastReadAyah: number | null;
 
+  showTranslation: boolean;
+  toggleTranslation: () => void;
+
   recentlyRead: number[],
 
 
@@ -82,7 +85,13 @@ export const useQuranReaderStore =
 
         recentlyRead: [],
 
+        showTranslation: true,
 
+        toggleTranslation: () =>
+          set((state) => ({
+            showTranslation:
+              !state.showTranslation,
+          })),
 
 
         setActiveAyah: (
@@ -190,6 +199,9 @@ export const useQuranReaderStore =
           bookmarks: state.bookmarks,
           recentlyRead:
             state.recentlyRead,
+
+          showTranslation:
+            state.showTranslation,
         }),
       }
     )

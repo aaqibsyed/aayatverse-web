@@ -2,6 +2,7 @@
 
 interface Props {
   arabic: string;
+  translation: string | undefined;
   surahName: string;
   surahNumber: number;
   ayahNumber: number;
@@ -9,6 +10,7 @@ interface Props {
 
 export default function ShareVerseCard({
   arabic,
+  translation,
   surahName,
   surahNumber,
   ayahNumber,

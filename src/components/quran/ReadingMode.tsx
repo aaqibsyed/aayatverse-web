@@ -38,7 +38,8 @@ export default function ReadingMode({
     addBookmark,
     removeBookmark,
     setActiveAyah,
-    setLastReadPosition
+    setLastReadPosition,
+    showTranslation,
   } = useQuranReaderStore();
 
   const [
@@ -173,7 +174,7 @@ export default function ReadingMode({
         true
       );
   }, []);
-
+ console.log(verses[1], showTranslation)
   return (
     <>
       <div
@@ -330,6 +331,71 @@ export default function ReadingMode({
           )
         })}
       </div >
+      {showTranslation && (
+        <div
+          className="
+      mt-8
+
+      rounded-3xl
+
+      border
+
+      bg-card
+
+      p-6
+      sm:p-8
+    "
+        >
+          <h3
+            className="
+        mb-6
+
+        text-lg
+        font-semibold
+      "
+          >
+            Translation
+          </h3>
+
+          <div className="space-y-5">
+            {verses.map(
+              (verse, index) => (
+                <div
+                  key={verse.id}
+                  className="
+              border-b
+              pb-4
+              last:border-0
+            "
+                >
+                  <div
+                    className="
+                mb-2
+
+                text-sm
+                font-semibold
+
+                text-emerald-600
+              "
+                  >
+                    {index + 1}
+                  </div>
+
+                  <p
+                    className="
+                leading-8
+
+                text-muted-foreground
+              "
+                  >
+                    {verse.translation || "NO TRANSLATION"}
+                  </p>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      )}
       <FloatingAyahToolbar
         visible={
           selectedAyah !== null
@@ -433,6 +499,10 @@ export default function ReadingMode({
               arabic={
                 verses[selectedAyah - 1]
                   .text_uthmani
+              }
+              translation={
+                verses[selectedAyah - 1]
+                  .translation
               }
               surahName={
                 chapterNameSimple ??

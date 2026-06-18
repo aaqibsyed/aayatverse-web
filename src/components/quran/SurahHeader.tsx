@@ -1,3 +1,4 @@
+import { Button } from "../ui/button";
 import ViewModeToggle from "./ViewModeToggle";
 
 interface Props {
@@ -65,7 +66,7 @@ export default function SurahHeader({
   >
     Surah {surahNumber}
   </span> */}
-  
+
 
             <h1
               className="
@@ -114,6 +115,16 @@ export default function SurahHeader({
 
         <div className="mt-8 flex justify-center">
           <ViewModeToggle />
+          {/* <Button
+            variant={
+              showTranslation
+                ? "default"
+                : "outline"
+            }
+            onClick={toggleTranslation}
+          >
+            Translation
+          </Button> */}
         </div>
       </div>
     </div>
