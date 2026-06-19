@@ -3,7 +3,7 @@ import { haptics } from "@/lib/haptics";
 import { copyAyah, shareAyah, shareVerseImage } from "@/lib/quran-actions";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
 import { Bookmark, Copy, ImageIcon, Share } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 import ShareVerseCard from "./ShareVerseCard";
 
@@ -11,6 +11,7 @@ interface Props {
   surahNumber: number;
   verseNumber: number;
   arabic: string;
+  translation: string;
   chapterNameSimple?: string;
 }
 
@@ -18,8 +19,12 @@ export default function VerseCard({
   surahNumber,
   verseNumber,
   arabic,
+  translation,
   chapterNameSimple,
 }: Props) {
+
+  const [showTafsir, setShowTafsir] =
+    useState(false);
 
   const shareCardRef =
     useRef<HTMLDivElement>(null);
@@ -163,6 +168,7 @@ export default function VerseCard({
 
                 await copyAyah(
                   arabic,
+                  translation,
                   surahNumber,
                   verseNumber,
                   chapterNameSimple,
@@ -190,6 +196,7 @@ export default function VerseCard({
 
                 await shareAyah(
                   arabic,
+                  translation,
                   surahNumber,
                   verseNumber,
                   chapterNameSimple
@@ -266,6 +273,60 @@ export default function VerseCard({
       >
         {arabic}
       </p>
+      {translation && (
+        <div className="mt-8 pt-6 border-t border-border/50">
+          <div
+            className="
+                        mb-3
+                        text-xs
+                        font-medium
+                        uppercase
+                        tracking-[0.2em]
+                        text-emerald-600
+                        dark:text-emerald-400
+                        flex
+                        justify-between
+                      "
+          >
+            <div>
+              Translation
+            </div>
+            <div>
+              <button
+                onClick={() =>
+                  setShowTafsir(!showTafsir)
+                }
+              >
+                📖 Tafsir
+              </button>
+            </div>
+          </div>
+
+          <p
+            className="
+                        text-base
+                        leading-8
+                        text-slate-700
+                        dark:text-slate-300
+                      "
+          >
+            {translation}
+          </p>
+        </div>
+      )}
+      {showTafsir && (
+        <div
+          className="
+                      mt-4
+                      rounded-2xl
+                      border
+                      p-5
+                      bg-muted/30
+                    "
+        >
+          Tafsir coming soon
+        </div>
+      )}
       <div
         className="
                   fixed
@@ -279,6 +340,7 @@ export default function VerseCard({
             arabic={
               arabic
             }
+            translation={translation}
             surahName={
               chapterNameSimple ??
               `Surah ${surahNumber}`

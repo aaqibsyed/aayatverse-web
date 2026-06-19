@@ -377,6 +377,7 @@ export default function ReadingMode({
             verses[selectedAyah - 1];
           await copyAyah(
             verse.text_uthmani,
+            verse.translation,
             surahNumber,
             selectedAyah,
             chapterNameSimple
@@ -394,6 +395,7 @@ export default function ReadingMode({
 
           await shareAyah(
             verse.text_uthmani,
+            verse.translation,
             surahNumber,
             selectedAyah,
             chapterNameSimple
@@ -434,6 +436,8 @@ export default function ReadingMode({
                 verses[selectedAyah - 1]
                   .text_uthmani
               }
+              translation={verses[selectedAyah - 1]
+                ?.translation}
               surahName={
                 chapterNameSimple ??
                 `Surah ${surahNumber}`
