@@ -216,10 +216,10 @@ export default function ShareVerseCard({
 
             <p
               className="
-        text-4xl
-        leading-relaxed
-        text-slate-200
-      "
+                          text-4xl
+                          leading-relaxed
+                          text-slate-200
+                        "
             >
               {translation}
             </p>
