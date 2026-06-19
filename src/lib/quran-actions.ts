@@ -5,12 +5,15 @@ import { toBlob } from "html-to-image";
 
 export async function copyAyah(
   arabic: string,
-  surahNumber: number,
+  translation: string,
+  surahNumber: number | string,
   ayahNumber: number,
   chapterNameSimple?: string,
 ) {
   const text = `
 ${arabic}
+
+${translation}
 
 Surah ${chapterNameSimple ?? surahNumber}
 (${surahNumber}:${ayahNumber})
@@ -30,6 +33,7 @@ AayatVerse.com
 
 export async function shareAyah(
   arabic: string,
+  translation: string,
   surahNumber: number,
   ayahNumber: number,
   chapterNameSimple?: string,
@@ -37,10 +41,12 @@ export async function shareAyah(
   const text = `
 ${arabic}
 
+${translation}
+
 Surah ${chapterNameSimple ?? surahNumber}
 (${surahNumber}:${ayahNumber})
 
-Read on AayatVerse:
+Read on AayatVerse
 https://aayatverse.com/quran/${surahNumber}?ayah=${ayahNumber}
 `.trim();
 

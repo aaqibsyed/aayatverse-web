@@ -52,6 +52,15 @@ export default function StudyMode({
     setActiveAyah,
   ]);
 
+  useEffect(() => {
+  if (verses.length) {
+    console.log(
+      "First verse:",
+      verses[0]
+    );
+  }
+}, [verses]);
+
   return (
     <div className="space-y-6">
       {surahNumber !== 1 &&
@@ -106,6 +115,7 @@ export default function StudyMode({
               surahNumber={surahNumber}
               verseNumber={verseNumber}
               arabic={verse.text_uthmani}
+              translation={verse.translation}
               chapterNameSimple={chapterNameSimple}
             />
           </div>

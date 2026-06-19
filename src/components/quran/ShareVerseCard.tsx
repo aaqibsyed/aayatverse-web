@@ -2,6 +2,7 @@
 
 interface Props {
   arabic: string;
+  translation: string;
   surahName: string;
   surahNumber: number;
   ayahNumber: number;
@@ -9,6 +10,7 @@ interface Props {
 
 export default function ShareVerseCard({
   arabic,
+  translation,
   surahName,
   surahNumber,
   ayahNumber,
@@ -191,6 +193,38 @@ export default function ShareVerseCard({
         >
           {arabic}
         </div>
+        {translation && (
+          <div
+            className="
+                        mt-12
+                        border-t
+                        border-white/10
+                        pt-10
+                      "
+          >
+            <div
+              className="
+                          mb-4
+                          text-sm
+                          uppercase
+                          tracking-[0.3em]
+                          text-emerald-400
+                        "
+            >
+              Translation
+            </div>
+
+            <p
+              className="
+        text-4xl
+        leading-relaxed
+        text-slate-200
+      "
+            >
+              {translation}
+            </p>
+          </div>
+        )}
         <div
           style={{
             width: 260,
