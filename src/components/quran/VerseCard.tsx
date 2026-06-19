@@ -2,7 +2,7 @@ import AppCard from "@/components/shared/AppCard";
 import { haptics } from "@/lib/haptics";
 import { copyAyah, shareAyah, shareVerseImage } from "@/lib/quran-actions";
 import { useQuranReaderStore } from "@/store/quran-reader-store";
-import { Bookmark, Copy, ImageIcon, Share } from "lucide-react";
+import { Bookmark, Copy, ImageIcon, Share, ChevronDown, BookOpen } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import ShareVerseCard from "./ShareVerseCard";
@@ -25,6 +25,12 @@ export default function VerseCard({
 
   const [showTafsir, setShowTafsir] =
     useState(false);
+
+  // const [showWordStudy, setShowWordStudy] =
+  //   useState(false);
+
+  // const [showNotes, setShowNotes] =
+  //   useState(false);
 
   const shareCardRef =
     useRef<HTMLDivElement>(null);
@@ -284,22 +290,9 @@ export default function VerseCard({
                         tracking-[0.2em]
                         text-emerald-600
                         dark:text-emerald-400
-                        flex
-                        justify-between
                       "
           >
-            <div>
-              Translation
-            </div>
-            <div>
-              <button
-                onClick={() =>
-                  setShowTafsir(!showTafsir)
-                }
-              >
-                📖 Tafsir
-              </button>
-            </div>
+            Translation
           </div>
 
           <p
@@ -314,19 +307,100 @@ export default function VerseCard({
           </p>
         </div>
       )}
-      {showTafsir && (
-        <div
+      <div className="mt-8 space-y-3">
+
+        <button
+          onClick={() =>
+            setShowTafsir(!showTafsir)
+          }
           className="
-                      mt-4
+                      w-full
+                      flex
+                      items-center
+                      justify-between
+
                       rounded-2xl
                       border
-                      p-5
-                      bg-muted/30
+
+                      p-4
+
+                      transition-all
+
+                      hover:border-emerald-300
+                      hover:bg-emerald-50/50
+
+                      dark:hover:bg-emerald-950/20
                     "
         >
-          Tafsir coming soon
-        </div>
-      )}
+          <div className="flex items-center gap-2">
+            <BookOpen
+              className="
+                          h-5
+                          w-5
+                          text-emerald-600
+                        "
+            />
+
+            <span
+              className="
+                          font-medium
+                        "
+            >
+              Tafsir
+            </span>
+          </div>
+
+          <ChevronDown
+            className={`
+                      h-4
+                      w-4
+                      transition-transform
+
+                      ${showTafsir
+                              ? "rotate-180"
+                              : ""}
+                    `}
+          />
+        </button>
+
+        {showTafsir && (
+          <div
+            className="
+                        rounded-2xl
+                        border
+
+                        bg-muted/30
+
+                        p-5
+                      "
+          >
+            <div
+              className="
+          text-sm
+          font-medium
+          text-emerald-600
+          mb-2
+        "
+            >
+              Tafsir Coming Soon
+            </div>
+
+            <p
+              className="
+          text-sm
+          leading-7
+          text-muted-foreground
+        "
+            >
+              Detailed commentary from trusted
+              scholars such as Ibn Kathir,
+              Tafheem-ul-Quran and
+              Maariful Quran will appear here.
+            </p>
+          </div>
+        )}
+      </div>
+
       <div
         className="
                   fixed
