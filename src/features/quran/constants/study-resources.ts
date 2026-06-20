@@ -18,7 +18,7 @@ export const TRANSLATIONS: TranslationSource[] = [
   },
   {
     id: 84,
-    label: "Taqi Usmani",
+    label: "Usmani",
     language: "en",
   },
   {
