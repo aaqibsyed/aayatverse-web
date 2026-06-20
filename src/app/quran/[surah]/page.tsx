@@ -34,10 +34,14 @@ export default function SurahPage() {
     } = useChapter(chapterId);
 
     const {
+        selectedTranslationId,
+    } = useQuranReaderStore();
+
+    const {
         data,
         isLoading,
         error,
-    } = useVerses(chapterId);
+    } = useVerses(chapterId, selectedTranslationId);
 
     const { viewMode } =
         useQuranReaderStore();

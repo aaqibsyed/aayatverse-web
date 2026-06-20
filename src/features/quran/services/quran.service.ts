@@ -20,7 +20,8 @@ export async function getChapters() {
 }
 
 export async function getChapterVerses(
-  chapterId: number
+  chapterId: number,
+  translationId: number,
 ): Promise<VerseResponse> {
 
   const [arabicData, translationData] =
@@ -30,7 +31,7 @@ export async function getChapterVerses(
       ),
 
       apiFetch<TranslationResponse>(
-        `${BASE_URL}/quran/translations/20?chapter_number=${chapterId}`
+        `${BASE_URL}/quran/translations/${translationId}?chapter_number=${chapterId}`
       ),
     ]);
 

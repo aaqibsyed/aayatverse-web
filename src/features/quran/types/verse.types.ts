@@ -3,6 +3,7 @@ export interface Verse {
   verse_key: string;
   text_uthmani: string;
   translation: string;
+  tafsir?: string;
 }
 
 export interface VerseResponse {

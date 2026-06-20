@@ -114,6 +114,7 @@ export default function StudyMode({
             <VerseCard
               surahNumber={surahNumber}
               verseNumber={verseNumber}
+              verseKey={verse.verse_key}
               arabic={verse.text_uthmani}
               translation={verse.translation}
               chapterNameSimple={chapterNameSimple}
