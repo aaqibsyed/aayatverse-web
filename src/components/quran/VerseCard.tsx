@@ -6,10 +6,15 @@ import { Bookmark, Copy, ImageIcon, Share, ChevronDown, BookOpen } from "lucide-
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import ShareVerseCard from "./ShareVerseCard";
+import { useTafsir } from "@/features/quran/hooks/use-tafsir";
+import parse from "html-react-parser";
+import TranslationSelector from "./TranslationSelector";
+import TranslationPill from "./TranslationPill";
 
 interface Props {
   surahNumber: number;
   verseNumber: number;
+  verseKey: string;
   arabic: string;
   translation: string;
   chapterNameSimple?: string;
@@ -18,6 +23,7 @@ interface Props {
 export default function VerseCard({
   surahNumber,
   verseNumber,
+  verseKey,
   arabic,
   translation,
   chapterNameSimple,
@@ -31,6 +37,14 @@ export default function VerseCard({
 
   // const [showNotes, setShowNotes] =
   //   useState(false);
+
+  const {
+    data: tafsirData,
+    isLoading,
+  } = useTafsir(
+    verseKey,
+    showTafsir
+  );
 
   const shareCardRef =
     useRef<HTMLDivElement>(null);
@@ -281,18 +295,24 @@ export default function VerseCard({
       </p>
       {translation && (
         <div className="mt-8 pt-6 border-t border-border/50">
-          <div
-            className="
-                        mb-3
-                        text-xs
-                        font-medium
-                        uppercase
-                        tracking-[0.2em]
-                        text-emerald-600
-                        dark:text-emerald-400
-                      "
-          >
-            Translation
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <div
+                className="
+                            text-xs
+                            uppercase
+                            tracking-[0.25em]
+                            font-semibold
+                            text-emerald-600
+                            dark:text-emerald-400
+                          "
+              >
+                Translation
+              </div>
+            </div>
+
+              {/* <TranslationSelector /> */}
+              <TranslationPill />
           </div>
 
           <p
@@ -320,7 +340,14 @@ export default function VerseCard({
                       justify-between
 
                       rounded-2xl
-                      border
+                      border-emerald-500/10
+
+                      bg-gradient-to-r
+                      from-emerald-50
+                      to-white
+
+                      dark:from-emerald-950/20
+                      dark:to-background
 
                       p-4
 
@@ -357,46 +384,78 @@ export default function VerseCard({
                       transition-transform
 
                       ${showTafsir
-                              ? "rotate-180"
-                              : ""}
+                ? "rotate-180"
+                : ""}
                     `}
           />
         </button>
+
 
         {showTafsir && (
           <div
             className="
                         rounded-2xl
                         border
+                       border-emerald-500/10
 
-                        bg-muted/30
+                        bg-gradient-to-b
 
+                        from-emerald-500/5
+                        to-transparent
+                        dark:from-emerald-500/10
                         p-5
                       "
           >
-            <div
-              className="
-          text-sm
-          font-medium
-          text-emerald-600
-          mb-2
-        "
-            >
-              Tafsir Coming Soon
+            <div className="mb-5 flex items-center gap-3">
+
+              <BookOpen
+                className="
+      h-4
+      w-4
+      text-emerald-500
+    "
+              />
+
+              <span
+                className="
+                            rounded-full
+
+                            bg-emerald-100
+                            px-3
+                            py-1
+
+                            text-xs
+                            font-medium
+
+                            text-emerald-700
+
+                            dark:bg-emerald-900/30
+                            dark:text-emerald-300
+                          "
+              >
+                Ibn Kathir
+              </span>
+
             </div>
 
-            <p
-              className="
-          text-sm
-          leading-7
-          text-muted-foreground
+            {isLoading ? (
+              <p className="text-sm">
+                Loading tafsir...
+              </p>
+            ) : (
+              <div
+                className="
+          prose
+          prose-sm
+          dark:prose-invert
+          max-w-none
         "
-            >
-              Detailed commentary from trusted
-              scholars such as Ibn Kathir,
-              Tafheem-ul-Quran and
-              Maariful Quran will appear here.
-            </p>
+              >
+                {parse(
+                  tafsirData?.tafsir?.text ?? ""
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>

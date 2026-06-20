@@ -37,6 +37,17 @@ interface QuranReaderState {
 
   recentlyRead: number[],
 
+  selectedTranslationId: number;
+
+  selectedTafsirId: number;
+
+  setTranslation: (
+    translationId: number
+  ) => void;
+
+  setTafsir: (
+    tafsirId: number
+  ) => void;
 
 
   setActiveAyah: (
@@ -82,7 +93,9 @@ export const useQuranReaderStore =
 
         recentlyRead: [],
 
+        selectedTranslationId: 20,
 
+        selectedTafsirId: 169,
 
 
         setActiveAyah: (
@@ -160,6 +173,22 @@ export const useQuranReaderStore =
         setViewMode: (viewMode) =>
           set({ viewMode }),
 
+        setTranslation: (
+          translationId
+        ) =>
+          set({
+            selectedTranslationId:
+              translationId,
+          }),
+
+        setTafsir: (
+          tafsirId
+        ) =>
+          set({
+            selectedTafsirId:
+              tafsirId,
+          }),
+
         increaseFontSize: () =>
           set((state) => ({
             fontSize: Math.min(
@@ -190,6 +219,11 @@ export const useQuranReaderStore =
           bookmarks: state.bookmarks,
           recentlyRead:
             state.recentlyRead,
+          selectedTranslationId:
+            state.selectedTranslationId,
+
+          selectedTafsirId:
+            state.selectedTafsirId,
         }),
       }
     )
