@@ -13,9 +13,10 @@ export interface TafsirResponse {
 }
 
 export async function getVerseTafsir(
-  verseKey: string
+  verseKey: string,
+  tafsirId: number
 ) {
   return apiFetch<TafsirResponse>(
-    `${BASE_URL}/tafsirs/${DEFAULT_TAFSIR_ID}/by_ayah/${verseKey}`
+    `${BASE_URL}/tafsirs/${tafsirId}/by_ayah/${verseKey}`
   );
 }

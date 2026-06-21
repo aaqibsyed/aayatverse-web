@@ -10,6 +10,7 @@ import { useTafsir } from "@/features/quran/hooks/use-tafsir";
 import parse from "html-react-parser";
 import TranslationSelector from "./TranslationSelector";
 import TranslationPill from "./TranslationPill";
+import { TAFSIRS } from "@/features/quran/constants/study-resources";
 
 interface Props {
   surahNumber: number;
@@ -39,12 +40,20 @@ export default function VerseCard({
   //   useState(false);
 
   const {
+    selectedTafsirId,
+    setTafsir,
+  } = useQuranReaderStore();
+
+  const {
     data: tafsirData,
     isLoading,
   } = useTafsir(
     verseKey,
+    selectedTafsirId,
     showTafsir
   );
+
+
 
   const shareCardRef =
     useRef<HTMLDivElement>(null);
@@ -311,8 +320,8 @@ export default function VerseCard({
               </div>
             </div>
 
-              {/* <TranslationSelector /> */}
-              <TranslationPill />
+            {/* <TranslationSelector /> */}
+            <TranslationPill />
           </div>
 
           <p
@@ -406,35 +415,76 @@ export default function VerseCard({
                         p-5
                       "
           >
-            <div className="mb-5 flex items-center gap-3">
+
+            <div className="mb-4 flex items-center gap-2">
 
               <BookOpen
                 className="
-      h-4
-      w-4
-      text-emerald-500
-    "
+                            h-4
+                            w-4
+                            text-emerald-500
+                          "
               />
 
-              <span
-                className="
-                            rounded-full
+              
+                <div
+                  className="
+                              mb-5
+                              flex
+                              flex-wrap
+                              gap-2
+                            "
+                >
 
-                            bg-emerald-100
-                            px-3
-                            py-1
+                  {TAFSIRS.map(
+                    (tafsir) => (
+                      <button
+                        key={tafsir.id}
+                        onClick={() =>
+                          setTafsir(
+                            tafsir.id
+                          )
+                        }
+                        className={`
+                                rounded-full
 
-                            text-xs
-                            font-medium
+                                px-3
+                                py-1.5
 
-                            text-emerald-700
+                                text-[11px]
+                                font-medium
 
-                            dark:bg-emerald-900/30
-                            dark:text-emerald-300
-                          "
-              >
-                Ibn Kathir
-              </span>
+                                whitespace-nowrap
+
+                                transition-all
+
+                                ${selectedTafsirId ===
+                            tafsir.id
+                            ? `
+                                        bg-gradient-to-r
+                                        from-emerald-500
+                                        to-teal-500
+
+                                        text-white
+
+                                        shadow-lg
+                                        shadow-emerald-500/20
+                                      `
+                            : `
+                                        border
+
+                                        border-border
+
+                                        hover:bg-muted
+                                      `
+                          }
+                              `}
+                      >
+                        {tafsir.label}
+                      </button>
+                    )
+                  )}
+                </div>
 
             </div>
 
@@ -445,11 +495,26 @@ export default function VerseCard({
             ) : (
               <div
                 className="
-          prose
-          prose-sm
-          dark:prose-invert
-          max-w-none
-        "
+                            prose
+                            prose-sm
+                            dark:prose-invert
+                            max-w-none
+
+                            text-[15px]
+                            leading-8
+
+                            text-slate-700
+                            dark:text-slate-300
+
+                            prose-headings:text-emerald-700
+                            dark:prose-headings:text-emerald-300
+
+                            prose-strong:text-emerald-700
+                            dark:prose-strong:text-emerald-300
+                          "
+                          style={{
+                            fontFamily: "var(--font-tafsir)",
+                          }}
               >
                 {parse(
                   tafsirData?.tafsir?.text ?? ""

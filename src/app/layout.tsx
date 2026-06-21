@@ -7,6 +7,7 @@ import type {
   Metadata,
   Viewport,
 } from "next";
+import { Merriweather } from "next/font/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -136,13 +137,26 @@ export const viewport: Viewport = {
   themeColor: "#059669",
 };
 
+export const tafsirFont =
+  Merriweather({
+    subsets: ["latin"],
+    weight: [
+      "300",
+      "400",
+      "700",
+    ],
+    variable:
+      "--font-tafsir",
+    display: "swap",
+  });
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html lang="en" dir="ltr" className={`${tafsirFont.variable}`} suppressHydrationWarning>
       {/* <head>
         <meta
           name="apple-mobile-web-app-capable"

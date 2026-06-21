@@ -130,11 +130,11 @@ export default function TranslationPill() {
                                     translation.id && (
                                         <Check
                                             className="
-                      h-4
-                      w-4
+                                                    h-4
+                                                    w-4
 
-                      text-emerald-500
-                    "
+                                                    text-emerald-500
+                                                    "
                                         />
                                     )}
                             </button>
