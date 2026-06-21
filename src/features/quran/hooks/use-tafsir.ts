@@ -4,13 +4,18 @@ import { useQuery } from "@tanstack/react-query";
 import { getVerseTafsir } from "../services/tafsir.service";
 
 export function useTafsir(
-  verseKey: string,
-  enabled: boolean
+    verseKey: string,
+    tafsirId: number,
+    enabled: boolean,
 ) {
-  return useQuery({
-    queryKey: ["tafsir", verseKey],
-    queryFn: () =>
-      getVerseTafsir(verseKey),
-    enabled,
-  });
+    return useQuery({
+        queryKey: ["tafsir", verseKey, tafsirId,],
+        queryFn: () =>
+            getVerseTafsir(verseKey, tafsirId),
+        enabled,
+        // placeholderData:
+        //     (previousData) =>
+        //         previousData,
+    });
+
 }
