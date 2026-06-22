@@ -12,7 +12,8 @@ import {
 
 interface Props {
     arabic: string;
-    translation: string;
+    englishTranslation: string
+    urduTranslation: string
     surahName: string;
     surahNumber: number;
     ayahNumber: number;
@@ -26,7 +27,8 @@ interface Props {
 
 export default function VerseOfTheDayCard({
     arabic,
-    translation,
+    englishTranslation,
+    urduTranslation,
     surahName,
     surahNumber,
     ayahNumber,
@@ -202,7 +204,23 @@ export default function VerseOfTheDayCard({
                             dark:text-slate-400
                             "
                 >
-                    {translation}
+                    {englishTranslation}
+                </p>
+                <p
+                    className="
+                            mx-auto
+                            max-w-2xl
+
+                            text-center
+
+                            text-base
+                            leading-relaxed
+
+                            text-slate-600
+                            dark:text-slate-400
+                            "
+                >
+                    {urduTranslation}
                 </p>
             </div>
             <div
@@ -276,7 +294,7 @@ export default function VerseOfTheDayCard({
                     <Bookmark className="h-5 w-5" fill={isBookmarked
                         ? "currentColor"
                         : "none"} />
-                    
+
                 </button>
                 <button
                     onClick={onCopy}
@@ -308,7 +326,7 @@ export default function VerseOfTheDayCard({
                                 "
                 >
                     <Copy className="h-5 w-5" />
-                    
+
                 </button>
                 <button
                     onClick={onShare}
@@ -339,7 +357,7 @@ export default function VerseOfTheDayCard({
                                 "
                 >
                     <Share2 className="h-5 w-5" />
-                    
+
                 </button>
                 <button
                     onClick={onShareImage}
@@ -371,7 +389,7 @@ export default function VerseOfTheDayCard({
                                 "
                 >
                     <ImageIcon className="h-5 w-5" />
-                    
+
                 </button>
             </div>
             <div className="mt-4 flex justify-center ">

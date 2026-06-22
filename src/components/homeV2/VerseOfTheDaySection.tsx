@@ -56,7 +56,8 @@ export default function VerseOfTheDaySection() {
                 onCopy={() => {
                     copyAyah(
                         verseOfDay.arabic,
-                        verseOfDay.translation,
+                        verseOfDay.englishTranslation,
+                        verseOfDay.urduTranslation,
                         verseOfDay.surahNumber,
                         verseOfDay.ayahNumber,
                         verseOfDay.surahName
@@ -66,7 +67,8 @@ export default function VerseOfTheDaySection() {
                 onShare={() => {
                     shareAyah(
                         verseOfDay.arabic,
-                        verseOfDay.translation,
+                        verseOfDay.englishTranslation,
+                        verseOfDay.urduTranslation,
                         verseOfDay.surahNumber,
                         verseOfDay.ayahNumber,
                         verseOfDay.surahName
@@ -106,7 +108,8 @@ export default function VerseOfTheDaySection() {
                         arabic={
                             verseOfDay.arabic
                         }
-                        translation={verseOfDay.translation}
+                        englishTranslation={verseOfDay.englishTranslation}
+                        urduTranslation={verseOfDay.urduTranslation}
                         surahName={
                             verseOfDay.surahName
                         }

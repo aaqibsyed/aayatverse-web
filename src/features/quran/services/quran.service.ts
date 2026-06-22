@@ -48,3 +48,26 @@ export async function getChapterVerses(
     ),
   };
 }
+
+export async function getShareTranslations(
+  chapterId: number
+) {
+  const [english, urdu] =
+    await Promise.all([
+      apiFetch<TranslationResponse>(
+        `${BASE_URL}/quran/translations/20?chapter_number=${chapterId}`
+      ),
+
+      apiFetch<TranslationResponse>(
+        `${BASE_URL}/quran/translations/234?chapter_number=${chapterId}`
+      ),
+    ]);
+
+  return {
+    english:
+      english.translations,
+
+    urdu:
+      urdu.translations,
+  };
+}
