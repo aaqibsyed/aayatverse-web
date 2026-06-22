@@ -10,7 +10,8 @@ import { useTafsir } from "@/features/quran/hooks/use-tafsir";
 import parse from "html-react-parser";
 import TranslationSelector from "./TranslationSelector";
 import TranslationPill from "./TranslationPill";
-import { TAFSIRS } from "@/features/quran/constants/study-resources";
+import { TAFSIRS, TRANSLATIONS } from "@/features/quran/constants/study-resources";
+import { useShareTranslations } from "@/features/quran/hooks/use-share-translations";
 
 interface Props {
   surahNumber: number;
@@ -38,6 +39,22 @@ export default function VerseCard({
 
   // const [showNotes, setShowNotes] =
   //   useState(false);
+
+  const {
+  data: shareTranslations,
+} = useShareTranslations(
+  surahNumber
+);
+
+const shareEnglishTranslation =
+  shareTranslations?.english[
+    verseNumber - 1
+  ]?.text ?? "";
+
+const shareUrduTranslation =
+  shareTranslations?.urdu[
+    verseNumber - 1
+  ]?.text ?? "";
 
   const {
     selectedTafsirId,
@@ -426,26 +443,26 @@ export default function VerseCard({
                           "
               />
 
-              
-                <div
-                  className="
+
+              <div
+                className="
                               mb-5
                               flex
                               flex-wrap
                               gap-2
                             "
-                >
+              >
 
-                  {TAFSIRS.map(
-                    (tafsir) => (
-                      <button
-                        key={tafsir.id}
-                        onClick={() =>
-                          setTafsir(
-                            tafsir.id
-                          )
-                        }
-                        className={`
+                {TAFSIRS.map(
+                  (tafsir) => (
+                    <button
+                      key={tafsir.id}
+                      onClick={() =>
+                        setTafsir(
+                          tafsir.id
+                        )
+                      }
+                      className={`
                                 rounded-full
 
                                 px-3
@@ -459,8 +476,8 @@ export default function VerseCard({
                                 transition-all
 
                                 ${selectedTafsirId ===
-                            tafsir.id
-                            ? `
+                          tafsir.id
+                          ? `
                                         bg-gradient-to-r
                                         from-emerald-500
                                         to-teal-500
@@ -470,21 +487,21 @@ export default function VerseCard({
                                         shadow-lg
                                         shadow-emerald-500/20
                                       `
-                            : `
+                          : `
                                         border
 
                                         border-border
 
                                         hover:bg-muted
                                       `
-                          }
+                        }
                               `}
-                      >
-                        {tafsir.label}
-                      </button>
-                    )
-                  )}
-                </div>
+                    >
+                      {tafsir.label}
+                    </button>
+                  )
+                )}
+              </div>
 
             </div>
 
@@ -512,9 +529,9 @@ export default function VerseCard({
                             prose-strong:text-emerald-700
                             dark:prose-strong:text-emerald-300
                           "
-                          style={{
-                            fontFamily: "var(--font-tafsir)",
-                          }}
+                style={{
+                  fontFamily: "var(--font-tafsir)",
+                }}
               >
                 {parse(
                   tafsirData?.tafsir?.text ?? ""
@@ -538,7 +555,8 @@ export default function VerseCard({
             arabic={
               arabic
             }
-            translation={translation}
+            englishTranslation={shareEnglishTranslation}
+            urduTranslation={shareUrduTranslation}            
             surahName={
               chapterNameSimple ??
               `Surah ${surahNumber}`

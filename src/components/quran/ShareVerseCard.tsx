@@ -1,8 +1,11 @@
 "use client";
 
+import stripHtml from "@/features/quran/utils/strip-html";
+
 interface Props {
   arabic: string;
-  translation: string;
+  englishTranslation?: string;
+  urduTranslation?: string;
   surahName: string;
   surahNumber: number;
   ayahNumber: number;
@@ -10,21 +13,22 @@ interface Props {
 
 export default function ShareVerseCard({
   arabic,
-  translation,
+  englishTranslation,
+  urduTranslation,
   surahName,
   surahNumber,
   ayahNumber,
 }: Props) {
   const arabicFontSize =
-    arabic.length > 320
-      ? 40
-      : arabic.length > 240
-        ? 48
-        : arabic.length > 160
-          ? 56
-          : arabic.length > 100
-            ? 64
-            : 72;
+  arabic.length > 320
+    ? 34
+    : arabic.length > 240
+      ? 42
+      : arabic.length > 160
+        ? 50
+        : arabic.length > 100
+          ? 58
+          : 64;
 
   return (
     <div
@@ -136,7 +140,7 @@ export default function ShareVerseCard({
         </div>
 
         {/* Bismillah */}
-        <div
+        {/* <div
           dir="rtl"
           style={{
             fontSize: 120,
@@ -149,7 +153,7 @@ export default function ShareVerseCard({
           }}
         >
           ﷽
-        </div>
+        </div> */}
 
         <div
           style={{
@@ -193,38 +197,97 @@ export default function ShareVerseCard({
         >
           {arabic}
         </div>
-        {translation && (
-          <div
-            className="
-                        mt-12
-                        border-t
-                        border-white/10
-                        pt-10
-                      "
-          >
+        {(englishTranslation ||
+          urduTranslation) && (
             <div
-              className="
-                          mb-4
-                          text-sm
-                          uppercase
-                          tracking-[0.3em]
-                          text-emerald-400
-                        "
-            >
-              Translation
-            </div>
+              style={{
+                width: "100%",
 
-            <p
-              className="
-                          text-4xl
-                          leading-relaxed
-                          text-slate-200
-                        "
+                marginTop: 40,
+
+                paddingTop: 40,
+
+                borderTop:
+                  "1px solid rgba(16,185,129,0.15)",
+              }}
             >
-              {translation}
-            </p>
-          </div>
-        )}
+              {englishTranslation && (
+                <>
+                  <div
+                    style={{
+                      fontSize: 20,
+
+                      fontWeight: 700,
+
+                      color: "#059669",
+
+                      marginBottom: 14,
+
+                      textTransform:
+                        "uppercase",
+
+                      letterSpacing: 2,
+                    }}
+                  >
+                    English (Saheeh)
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: 28,
+
+                      lineHeight: 1.8,
+
+                      color: "#334155",
+
+                      textAlign: "center",
+
+                      marginBottom: 32,
+                    }}
+                  >
+                    {stripHtml(englishTranslation)}
+                  </div>
+                </>
+              )}
+
+              {urduTranslation && (
+                <>
+                  <div
+                    style={{
+                      fontSize: 20,
+
+                      fontWeight: 700,
+
+                      color: "#059669",
+
+                      marginBottom: 14,
+
+                      textAlign: "right",
+
+                      direction: "rtl",
+                    }}
+                  >
+                    اردو ترجمہ
+                  </div>
+
+                  <div
+                    dir="rtl"
+                    style={{
+                      fontSize: 30,
+
+                      lineHeight: 2,
+
+                      color: "#334155",
+
+                      textAlign: "right",
+                    }}
+                  >
+                    {stripHtml(urduTranslation)}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         <div
           style={{
             width: 260,

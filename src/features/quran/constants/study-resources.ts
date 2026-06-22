@@ -18,13 +18,18 @@ export const TRANSLATIONS: TranslationSource[] = [
   },
   {
     id: 84,
-    label: "Taqi Usmani",
+    label: "Taqi",
     language: "en",
   },
   {
     id: 85,
     label: "Haleem",
     language: "en",
+  },
+  {
+    id: 234,
+    label: "Urdu",
+    language: "ur",
   },
 ];
 
@@ -39,11 +44,11 @@ export const TAFSIRS: TafsirSource[] = [
     label: "Maarif",
     language: "en",
   },
-  // {
-  //   id: 159,
-  //   label: "Bayan",
-  //   language: "ur",
-  // },
+  {
+    id: 159,
+    label: "Bayan",
+    language: "ur",
+  },
   {
     id: 160,
     label: "Urdu",
