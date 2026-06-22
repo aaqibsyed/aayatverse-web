@@ -1,5 +1,4 @@
 import { apiFetch } from "@/lib/api-client";
-import { DEFAULT_TAFSIR_ID } from "../constants/tafsir";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_QURAN_API_URL;

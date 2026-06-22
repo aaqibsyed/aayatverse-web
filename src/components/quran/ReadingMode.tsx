@@ -12,6 +12,8 @@ import { toast } from "sonner";
 import { copyAyah, shareAyah, shareVerseImage } from "@/lib/quran-actions";
 import { haptics } from "@/lib/haptics";
 import ShareVerseCard from "./ShareVerseCard";
+import { useShareTranslations } from "@/features/quran/hooks/use-share-translations";
+import stripHtml from "@/features/quran/utils/strip-html";
 
 interface Props {
   surahNumber: number;
@@ -26,6 +28,12 @@ export default function ReadingMode({
   targetAyah,
   chapterNameSimple,
 }: Props) {
+
+  const {
+    data: shareTranslations,
+  } = useShareTranslations(
+    surahNumber
+  );
 
   const shareCardRef =
     useRef<HTMLDivElement>(null);
@@ -47,6 +55,7 @@ export default function ReadingMode({
   ] = useState<number | null>(
     null
   );
+
 
   const [
     toolbarPosition,
@@ -375,9 +384,24 @@ export default function ReadingMode({
 
           const verse =
             verses[selectedAyah - 1];
+
+          const englishTranslation =
+            stripHtml(
+              shareTranslations?.english[
+                selectedAyah - 1
+              ]?.text ?? ""
+            );
+
+          const urduTranslation =
+            stripHtml(
+              shareTranslations?.urdu[
+                selectedAyah - 1
+              ]?.text ?? ""
+            );
           await copyAyah(
             verse.text_uthmani,
-            verse.translation,
+            englishTranslation,
+            urduTranslation,
             surahNumber,
             selectedAyah,
             chapterNameSimple
@@ -393,9 +417,24 @@ export default function ReadingMode({
           const verse =
             verses[selectedAyah - 1];
 
+          const englishTranslation =
+            stripHtml(
+              shareTranslations?.english[
+                selectedAyah - 1
+              ]?.text ?? ""
+            );
+
+          const urduTranslation =
+            stripHtml(
+              shareTranslations?.urdu[
+                selectedAyah - 1
+              ]?.text ?? ""
+            );
+
           await shareAyah(
             verse.text_uthmani,
-            verse.translation,
+            englishTranslation,
+            urduTranslation,
             surahNumber,
             selectedAyah,
             chapterNameSimple
@@ -436,8 +475,20 @@ export default function ReadingMode({
                 verses[selectedAyah - 1]
                   .text_uthmani
               }
-              translation={verses[selectedAyah - 1]
-                ?.translation}
+              englishTranslation={
+                stripHtml(
+                  shareTranslations?.english[
+                    selectedAyah - 1
+                  ]?.text ?? ""
+                )
+              }
+              urduTranslation={
+                stripHtml(
+                  shareTranslations?.urdu[
+                    selectedAyah - 1
+                  ]?.text ?? ""
+                )
+              }
               surahName={
                 chapterNameSimple ??
                 `Surah ${surahNumber}`

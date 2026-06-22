@@ -46,12 +46,12 @@ export default function VerseCard({
   surahNumber
 );
 
-const shareEnglishTranslation =
+const englishTranslation =
   shareTranslations?.english[
     verseNumber - 1
   ]?.text ?? "";
 
-const shareUrduTranslation =
+const urduTranslation =
   shareTranslations?.urdu[
     verseNumber - 1
   ]?.text ?? "";
@@ -214,7 +214,8 @@ const shareUrduTranslation =
 
                 await copyAyah(
                   arabic,
-                  translation,
+                  englishTranslation,
+                  urduTranslation,
                   surahNumber,
                   verseNumber,
                   chapterNameSimple,
@@ -242,7 +243,8 @@ const shareUrduTranslation =
 
                 await shareAyah(
                   arabic,
-                  translation,
+                  englishTranslation,
+                  urduTranslation,
                   surahNumber,
                   verseNumber,
                   chapterNameSimple
@@ -555,8 +557,8 @@ const shareUrduTranslation =
             arabic={
               arabic
             }
-            englishTranslation={shareEnglishTranslation}
-            urduTranslation={shareUrduTranslation}            
+            englishTranslation={englishTranslation}
+            urduTranslation={urduTranslation}            
             surahName={
               chapterNameSimple ??
               `Surah ${surahNumber}`
