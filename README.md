@@ -7,6 +7,10 @@ AayatVerse is a modern, mobile-first Islamic platform built with Next.js and Rea
 > **⚠️ This project is currently under active development. New features are added regularly.**
 
 ---
+## 🚀 Live 
+
+https://AayatVerse.com
+---
 
 ## ✨ Vision
 
