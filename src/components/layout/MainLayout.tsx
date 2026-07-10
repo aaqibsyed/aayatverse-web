@@ -1,6 +1,8 @@
 import ScrollToTopButton from "../shared/ScrollToTopButton";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import FloatingBottomNav from "@/components/navigation/FloatingBottomNav";
+
 
 export default function MainLayout({
   children,
@@ -12,6 +14,7 @@ export default function MainLayout({
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <FloatingBottomNav />
       <ScrollToTopButton />
     </div>
   );
