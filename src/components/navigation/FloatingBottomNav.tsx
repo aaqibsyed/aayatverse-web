@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Search, BookOpen } from "lucide-react";
+import { Home, Search, BookOpen, Clapperboard } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -10,6 +10,11 @@ const items = [
         href: "/",
         label: "Home",
         icon: Home,
+    },
+     {
+        href: "/inspire",
+        label: "Inspire",
+        icon: Clapperboard,
     },
     {
         href: "/quran",

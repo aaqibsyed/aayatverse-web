@@ -3,7 +3,6 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import FloatingBottomNav from "@/components/navigation/FloatingBottomNav";
 
-
 export default function MainLayout({
   children,
 }: {

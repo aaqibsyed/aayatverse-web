@@ -169,3 +169,11 @@ html {
     @apply font-sans;
   }
 }
+
+.inspire-feed {
+  scrollbar-width: none;
+}
+
+.inspire-feed::-webkit-scrollbar {
+  display: none;
+}
