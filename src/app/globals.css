@@ -170,10 +170,11 @@ html {
   }
 }
 
-.inspire-feed {
+.inspire-scroll {
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.inspire-feed::-webkit-scrollbar {
+.inspire-scroll::-webkit-scrollbar {
   display: none;
 }

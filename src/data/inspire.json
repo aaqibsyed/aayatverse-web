@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "slug": "feel-this-naat",
+    "title": "Feel this Naat",
+    "caption": "Listen and feel this beautiful Naat",
+    "videoUrl": "/videos/naat.mp4",
+    "creator": "AayatVerse",
+    "tags": ["naat"]
+  },
+  {
+    "id": "2",
+    "slug": "love-muhammad",
+    "title": "I❤️Mohammad SAW",
+    "caption": "We all love Muhammad SAW",
+    "videoUrl": "/videos/loveMuhammadSAW.mp4",
+    "creator": "AayatVerse",
+    "tags": ["Patience"]
+  },
+  {
+    "id": "3",
+    "slug": "sabr-karke-kya-milega",
+    "title": "Sabr kar Ke kya Milega",
+    "caption": "What will you gain by embracing patience?",
+    "videoUrl": "/videos/patience.mp4",
+    "creator": "AayatVerse",
+    "tags": ["Patience"]
+  },
+  {
+    "id": "4",
+    "slug": "dada-pota-love",
+    "title": "Dada Pota love",
+    "caption": "Love and Bond between generations",
+    "videoUrl": "/videos/dadaPota.mp4",
+    "creator": "AayatVerse",
+    "tags": ["love","family"]
+  },
+  {
+    "id": "5",
+    "slug": "any-gate-jannah",
+    "title": "Enter through any gate of Jannah",
+    "caption": "Perform these deeds to enter through any gate of Jannah",
+    "videoUrl": "/videos/anygateJannah.mp4",
+    "creator": "AayatVerse",
+    "tags": ["jannah","paradise","jannat"]
+  },
+  {
+    "id": "6",
+    "slug": "beauty-of-muhammad",
+    "title": "Beauty of Muhammad SAW",
+    "caption": "The beauty of Prophet Muhammad SAW",
+    "videoUrl": "/videos/beautyOfProphet.mp4",
+    "creator": "AayatVerse",
+    "tags": ["prophet","muhammad","islam"]
+  }
+]

@@ -1,5 +1,5 @@
 import "./globals.css";
-import MainLayout from "@/components/layout/MainLayout";
+// import MainLayout from "@/components/layout/MainLayout";
 import { Toaster } from "sonner";
 import QueryProvider from "@/providers/query-provider";
 import AppProvider from "@/providers/app-provider";
@@ -171,7 +171,7 @@ export default function RootLayout({
       <body>
         <QueryProvider>
           <AppProvider>
-            <MainLayout>{children}</MainLayout>
+            {children}
             <Toaster
               richColors
               position="top-center"
