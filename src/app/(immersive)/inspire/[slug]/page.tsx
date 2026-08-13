@@ -15,7 +15,7 @@ export async function generateMetadata({
 }: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const inspire = getInspireBySlug(slug);
+  const inspire = await getInspireBySlug(slug);
 
   if (!inspire) {
     return {
@@ -48,7 +48,7 @@ export default async function InspireSlugPage({
 }: Props) {
   const { slug } = await params;
 
-  const inspire = getInspireBySlug(slug);
+  const inspire = await getInspireBySlug(slug);
 
   if (!inspire) {
     notFound();
