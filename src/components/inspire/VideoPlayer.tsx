@@ -29,6 +29,8 @@ export default function VideoPlayer({
   const [progress, setProgress] =
     useState(0);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   //Progress Bar
 
   useEffect(() => {
@@ -151,6 +153,12 @@ export default function VideoPlayer({
       observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const next = document.createElement("video");
+    next.src = src;
+    next.preload = "auto";
+  }, [src]);
+
   const togglePlay =
     async () => {
       const video =
@@ -180,6 +188,14 @@ w-full
 "
       onClick={togglePlay}
     >
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black z-20">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-[spin_0.8s_linear_infinite]" />
+            {/* <p className="text-white/70 text-xs">Buffering...</p> */}
+          </div>
+        </div>
+      )}
       <video
         ref={videoRef}
         src={src}
@@ -192,6 +208,7 @@ object-cover
         muted={muted}
         loop
         preload="auto"
+        onLoadedData={() => setIsLoading(false)}
       />
 
       {/* Play Icon */}

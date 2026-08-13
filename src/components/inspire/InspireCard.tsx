@@ -12,14 +12,21 @@ interface Props {
 export default function InspireCard({ item }: Props) {
   const handleShare = async () => {
     const url =
-  process.env.NEXT_PUBLIC_APP_URL +
-  `/inspire/${item.slug}`;
+      process.env.NEXT_PUBLIC_APP_URL +
+      `/inspire/${item.slug}`;
+
+    const message = `✨ ${item.title}
+
+${item.caption}
+
+🤍 Watch this Inspire on AayatVerse:
+`;
 
     try {
       if (navigator.share) {
         await navigator.share({
           title: item.title,
-          text: `${item.title}\n\n${item.caption}\n\nWatch on AayatVerse`,
+          text: message,
           url,
         });
 
@@ -141,7 +148,7 @@ backdrop-blur-md
             </button>
           )}
 
-          
+
         </div>
       </div>
     </section>
