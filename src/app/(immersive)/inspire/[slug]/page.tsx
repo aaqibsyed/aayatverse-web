@@ -5,17 +5,19 @@ import InspireFeed from "@/components/inspire/InspireFeed";
 import { getInspireBySlug } from "@/services/inspire/inspire.service";
 
 interface Props {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } =  params;
 
-  const inspire = getInspireBySlug(slug);
+  const inspire = await getInspireBySlug(slug);
 
   if (!inspire) {
     return {
@@ -33,6 +35,13 @@ export async function generateMetadata({
       url: `https://aayatverse.com/inspire/${slug}`,
       siteName: "AayatVerse",
       type: "video.other",
+      images: [
+        {
+          url: "https://aayatverse.com/og-default.jpg", // 👈 temporary
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
 
     twitter: {
@@ -46,15 +55,8 @@ export async function generateMetadata({
 export default async function InspireSlugPage({
   params,
 }: Props) {
-  const { slug } = await params;
-
-  const inspire = getInspireBySlug(slug);
-
-  if (!inspire) {
-    notFound();
-  }
 
   return <InspireFeed
-        initialSlug={slug}
-    />
+    initialSlug={params.slug}
+  />
 }

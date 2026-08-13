@@ -60,6 +60,14 @@ export default function InspireFeed({
     loadFeed();
   }, []);
 
+  useEffect(() => {
+    if (feed.length === 0) return;
+
+    const firstVideo = document.createElement("video");
+    firstVideo.src = feed[0].videoUrl;
+    firstVideo.preload = "auto";
+  }, [feed]);
+
   const appendBatch = useCallback(() => {
     if (allVideos.length === 0) return;
 

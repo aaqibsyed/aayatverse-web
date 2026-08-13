@@ -1,38 +1,65 @@
-import data from "@/data/inspire.json";
+import { supabase } from "@/lib/supabase/client";
 import { InspireVideo } from "@/types/inspire";
 
+/**
+ * Get all published inspire videos
+ */
+export async function getPublishedInspires(): Promise<InspireVideo[]> {
+  const { data, error } = await supabase
+    .from("inspires")
+    .select("*")
+    .eq("is_published", true)
+    .order("created_at", { ascending: false });
 
-function shuffle<T>(array: T[]) {
-  const copy = [...array];
-
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(
-      Math.random() * (i + 1)
-    );
-
-    [copy[i], copy[j]] = [
-      copy[j],
-      copy[i],
-    ];
+  if (error) {
+    console.error("Error fetching inspires:", error);
+    throw error;
   }
 
-  return copy;
+  return (data || []).map((item) => ({
+    id: item.id,
+    title: item.title,
+    slug: item.slug,
+    caption: item.caption,
+    videoUrl: item.video_path,
+
+    // ✅ FIXED: required fields
+    creator: "AayatVerse",
+
+    tags: [],
+
+    reference: item.reference ?? null,
+  }));
 }
 
-export function getInspireFeed(): InspireVideo[] {
-  return shuffle(
-    data as InspireVideo[]
-  );
-}
+/**
+ * Get single inspire by slug
+ */
+export async function getInspireBySlug(
+  slug: string
+): Promise<InspireVideo | null> {
+  const { data, error } = await supabase
+    .from("inspires")
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
-export function getInspireBySlug(
-    slug:string
-): InspireVideo | undefined {
+  if (error || !data) {
+    return null;
+  }
 
-    return (
-        data as InspireVideo[]
-    ).find(
-        video => video.slug === slug
-    );
+  return {
+    id: data.id,
+    title: data.title,
+    slug: data.slug,
+    caption: data.caption,
+    videoUrl: data.video_path,
 
+    // ✅ FIXED here too
+    creator: "AayatVerse",
+
+    tags: [],
+
+    reference: data.reference ?? null,
+  };
 }
