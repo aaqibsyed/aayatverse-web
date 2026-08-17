@@ -178,3 +178,8 @@ html {
 .inspire-scroll::-webkit-scrollbar {
   display: none;
 }
+
+.inspire-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
