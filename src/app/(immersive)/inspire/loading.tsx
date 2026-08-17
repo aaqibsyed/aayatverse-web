@@ -1,12 +1,18 @@
+import Image from "next/image";
+
 export default function Loading() {
   return (
     <div className="fixed inset-0 bg-black flex items-center justify-center">
       <div className="flex flex-col items-center gap-4">
-        
+
         {/* Logo pulse */}
-        <img
+        <Image
           src="/aayatverse-logo.png"
-          className="w-20 h-20 animate-pulse"
+          alt="AayatVerse"
+          width={80}
+          height={80}
+          className="animate-pulse"
+          priority
         />
 
         {/* Spinner */}

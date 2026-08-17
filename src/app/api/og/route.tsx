@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
@@ -25,10 +26,13 @@ export async function GET(req: Request) {
       >
         {/* 🔝 Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <img
-            src="https://aayatverse.com/aayatverse-logo.png"
+          <Image
+            src="/aayatverse-logo.png"
+            alt="AayatVerse"
             width={80}
             height={80}
+            className="animate-pulse"
+            priority
           />
           <span style={{ fontSize: 36, opacity: 0.9 }}>
             AayatVerse
