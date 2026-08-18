@@ -23,3 +23,12 @@ export interface InspireVideo {
 
   reference?: InspireReference;
 }
+
+export type Inspire = {
+  id: string;
+  title: string;
+  caption: string;
+  video_path: string;
+  is_published: boolean;
+  status: "pending" | "approved" | "rejected";
+};
