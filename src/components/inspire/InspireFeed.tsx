@@ -9,6 +9,7 @@ import type { InspireVideo } from "@/types/inspire";
 import { shuffleArray } from "@/lib/shuffle";
 
 import { createNextBatch } from "@/lib/shuffle";
+import Link from "next/link";
 
 interface Props {
   initialSlug?: string;
@@ -157,6 +158,25 @@ bg-black
           />
         </div>
       ))}
+      <Link
+        href="/inspire/upload"
+        className="
+    fixed
+    bottom-24
+    right-6
+    z-50
+    bg-white
+    text-black
+    px-4
+    py-3
+    rounded-full
+    shadow-lg
+    font-semibold
+    active:scale-95
+  "
+      >
+        Upload
+      </Link>
     </div>
   );
 }

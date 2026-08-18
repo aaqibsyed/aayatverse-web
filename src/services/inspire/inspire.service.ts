@@ -8,7 +8,8 @@ export async function getPublishedInspires(): Promise<InspireVideo[]> {
   const { data, error } = await supabase
     .from("inspires")
     .select("*")
-    .eq("is_published", true)
+    // .eq("is_published", true)
+    .eq("status", "approved")
     .order("created_at", { ascending: false });
 
   if (error) {
